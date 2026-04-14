@@ -37,12 +37,29 @@ export const metadata: Metadata = {
     "PMHNP",
     "counseling",
   ],
+  metadataBase: new URL("https://diatan-health-site.vercel.app"),
   openGraph: {
     title: "Diatan Health Services, LLC | Psychiatric & Mental Health Care",
     description:
       "Compassionate psychiatric and mental health services in Lauderhill, FL. Where mental wellness is our priority.",
     type: "website",
     locale: "en_US",
+    url: "https://diatan-health-site.vercel.app",
+    siteName: "Diatan Health Services",
+    images: [
+      {
+        url: "/diatan-logo.png",
+        width: 600,
+        height: 600,
+        alt: "Diatan Health Services — Psychiatric Care",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Diatan Health Services, LLC",
+    description: "Where mental wellness is our priority.",
+    images: ["/diatan-logo.png"],
   },
 };
 
