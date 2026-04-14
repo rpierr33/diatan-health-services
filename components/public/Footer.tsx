@@ -23,7 +23,7 @@ export default function Footer() {
               <span
                 className="font-semibold text-base font-lora"
                 style={{
-                  color: "#2D9E60",
+                  color: "#2D7A4F",
                   fontFamily: "var(--font-lora), Georgia, serif",
                 }}
               >
@@ -43,7 +43,7 @@ export default function Footer() {
             >
               <p
                 className="font-semibold mb-2 font-inter"
-                style={{ color: "#2D9E60", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+                style={{ color: "#2D7A4F", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
               >
                 Crisis Support — 24/7
               </p>
@@ -79,7 +79,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="transition-colors duration-200 hover:text-[#2D9E60]"
+                    className="transition-colors duration-200 hover:text-[#2D7A4F]"
                     style={{ color: "#8A9EA8" }}
                   >
                     {link.label}
@@ -113,7 +113,7 @@ export default function Footer() {
                 <li key={service}>
                   <Link
                     href="/services"
-                    className="transition-colors duration-200 hover:text-[#2D9E60]"
+                    className="transition-colors duration-200 hover:text-[#2D7A4F]"
                     style={{ color: "#8A9EA8" }}
                   >
                     {service}
@@ -135,7 +135,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin
                   className="w-4 h-4 mt-0.5 shrink-0"
-                  style={{ color: "#2D9E60" }}
+                  style={{ color: "#2D7A4F" }}
                   aria-hidden="true"
                 />
                 <span style={{ color: "#8A9EA8" }}>
@@ -147,12 +147,12 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Phone
                   className="w-4 h-4 shrink-0"
-                  style={{ color: "#2D9E60" }}
+                  style={{ color: "#2D7A4F" }}
                   aria-hidden="true"
                 />
                 <a
                   href="tel:9543475845"
-                  className="transition-colors hover:text-[#2D9E60]"
+                  className="transition-colors hover:text-[#2D7A4F]"
                   style={{ color: "#8A9EA8" }}
                 >
                   (954) 347-5845
@@ -161,12 +161,12 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Mail
                   className="w-4 h-4 shrink-0"
-                  style={{ color: "#2D9E60" }}
+                  style={{ color: "#2D7A4F" }}
                   aria-hidden="true"
                 />
                 <a
                   href="mailto:info@diatanhealthservices.com"
-                  className="transition-colors hover:text-[#2D9E60] break-all"
+                  className="transition-colors hover:text-[#2D7A4F] break-all"
                   style={{ color: "#8A9EA8" }}
                 >
                   info@diatanhealthservices.com
@@ -175,7 +175,7 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Clock
                   className="w-4 h-4 shrink-0"
-                  style={{ color: "#2D9E60" }}
+                  style={{ color: "#2D7A4F" }}
                   aria-hidden="true"
                 />
                 <span style={{ color: "#8A9EA8" }}>Monday – Friday</span>
@@ -194,13 +194,13 @@ export default function Footer() {
             rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/hipaa" className="transition-colors hover:text-[#2D9E60]">
+            <Link href="/hipaa" className="transition-colors hover:text-[#2D7A4F]">
               HIPAA Notice
             </Link>
-            <Link href="/privacy" className="transition-colors hover:text-[#2D9E60]">
+            <Link href="/privacy" className="transition-colors hover:text-[#2D7A4F]">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="transition-colors hover:text-[#2D9E60]">
+            <Link href="/terms" className="transition-colors hover:text-[#2D7A4F]">
               Terms of Service
             </Link>
           </div>

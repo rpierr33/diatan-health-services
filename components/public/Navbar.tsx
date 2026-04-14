@@ -56,7 +56,7 @@ export default function Navbar() {
             <div className="hidden sm:block">
               <div
                 className="font-semibold text-base leading-tight font-lora"
-                style={{ color: "#2D9E60", fontFamily: "var(--font-lora), Georgia, serif" }}
+                style={{ color: "#2D7A4F", fontFamily: "var(--font-lora), Georgia, serif" }}
               >
                 Diatan Health Services
               </div>
@@ -72,7 +72,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[#EEF7EE] font-inter"
+                className="px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[#F5EDE4] font-inter"
                 style={{
                   color: "#2C3E50",
                   fontFamily: "var(--font-inter), system-ui, sans-serif",
@@ -88,7 +88,7 @@ export default function Navbar() {
             <a
               href="tel:9543475845"
               className="hidden sm:flex items-center gap-1.5 text-sm font-medium transition-colors hover:opacity-80 font-inter"
-              style={{ color: "#2D9E60", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{ color: "#2D7A4F", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
               aria-label="Call us at (954) 347-5845"
             >
               <Phone className="w-4 h-4" aria-hidden="true" />
@@ -99,7 +99,7 @@ export default function Navbar() {
               size="sm"
               className="hidden sm:inline-flex font-semibold font-inter btn-breathe"
               style={{
-                backgroundColor: "#2D9E60",
+                backgroundColor: "#2D7A4F",
                 color: "#FFFFFF",
                 fontFamily: "var(--font-inter), system-ui, sans-serif",
               }}
@@ -107,7 +107,7 @@ export default function Navbar() {
               <Link href="/book-appointment">Book Appointment</Link>
             </Button>
             <button
-              className="lg:hidden p-2 rounded-lg transition-colors hover:bg-[#EEF7EE]"
+              className="lg:hidden p-2 rounded-lg transition-colors hover:bg-[#F5EDE4]"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
@@ -136,7 +136,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="block px-3 py-2.5 rounded-lg text-base font-medium hover:bg-[#EEF7EE] transition-colors font-inter"
+                className="block px-3 py-2.5 rounded-lg text-base font-medium hover:bg-[#F5EDE4] transition-colors font-inter"
                 style={{ color: "#2C3E50", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
                 onClick={() => setMobileOpen(false)}
               >
@@ -147,7 +147,7 @@ export default function Navbar() {
               <Button
                 asChild
                 className="w-full font-semibold btn-breathe font-inter"
-                style={{ backgroundColor: "#2D9E60", color: "#FFFFFF" }}
+                style={{ backgroundColor: "#2D7A4F", color: "#FFFFFF" }}
               >
                 <Link href="/book-appointment" onClick={() => setMobileOpen(false)}>
                   Book Appointment
@@ -156,7 +156,7 @@ export default function Navbar() {
               <a
                 href="tel:9543475845"
                 className="flex items-center justify-center gap-2 mt-3 py-2 text-sm font-medium font-inter"
-                style={{ color: "#2D9E60" }}
+                style={{ color: "#2D7A4F" }}
               >
                 <Phone className="w-4 h-4" aria-hidden="true" />
                 (954) 347-5845

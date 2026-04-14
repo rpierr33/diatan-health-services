@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ClipboardList,
   Pill,
@@ -18,22 +17,24 @@ import {
   RefreshCw,
   Star,
   ChevronRight,
+  ChevronDown,
   Phone,
   Calendar,
   CheckCircle2,
+  Quote,
 } from "lucide-react";
 
 const services = [
-  { icon: ClipboardList, name: "Psychiatric Evaluations", desc: "Comprehensive assessments for accurate diagnosis and personalized treatment plans." },
-  { icon: Pill, name: "Medication Management", desc: "Expert prescribing and monitoring of psychiatric medications." },
-  { icon: Heart, name: "Individual Therapy", desc: "One-on-one counseling sessions tailored to your unique needs." },
-  { icon: Shield, name: "Crisis Intervention", desc: "Immediate, compassionate support during mental health emergencies." },
-  { icon: Video, name: "Telepsychiatry", desc: "Convenient remote consultations via secure video or phone." },
-  { icon: BookOpen, name: "Psychoeducation", desc: "Education on conditions, treatments, and coping skills." },
-  { icon: Users, name: "Psychosocial Rehab", desc: "Evidence-based programs to enhance independent functioning." },
-  { icon: Leaf, name: "Wellness & Prevention", desc: "Stress reduction, resilience building, and self-care programs." },
-  { icon: Network, name: "Care Coordination", desc: "Seamless integration with your primary care team." },
-  { icon: RefreshCw, name: "Continuity of Care", desc: "Ongoing monitoring and long-term recovery support." },
+  { icon: ClipboardList, name: "Psychiatric Evaluations", desc: "Comprehensive assessments leading to accurate diagnosis and a personalized treatment plan built around your specific needs and history." },
+  { icon: Pill, name: "Medication Management", desc: "Expert prescribing, titration, and ongoing monitoring of psychiatric medications to achieve optimal therapeutic outcomes with minimal side effects." },
+  { icon: Heart, name: "Individual Therapy", desc: "One-on-one counseling sessions drawing from evidence-based modalities — CBT, DBT, trauma-informed care — tailored to your unique situation." },
+  { icon: Shield, name: "Crisis Intervention", desc: "Immediate, compassionate support during acute mental health emergencies. Same-day assessments and stabilization plans when you need it most." },
+  { icon: Video, name: "Telepsychiatry", desc: "Secure HIPAA-compliant video or phone consultations. Full psychiatric care from anywhere in Florida — no waiting room, no commute." },
+  { icon: BookOpen, name: "Psychoeducation", desc: "Structured education on your condition, treatment options, and evidence-based coping skills that help you stay in control of your mental health." },
+  { icon: Users, name: "Psychosocial Rehab", desc: "Evidence-based group and individual programs that rebuild social skills, daily functioning, and community integration for long-term recovery." },
+  { icon: Leaf, name: "Wellness & Prevention", desc: "Proactive programs focused on stress reduction, resilience building, sleep hygiene, and self-care to prevent crisis before it begins." },
+  { icon: Network, name: "Care Coordination", desc: "Seamless communication with your primary care physician, specialists, and support systems to ensure unified, whole-person care." },
+  { icon: RefreshCw, name: "Continuity of Care", desc: "Long-term monitoring, treatment adjustment, and recovery support that adapts as your needs evolve — never just a one-time visit." },
 ];
 
 const conditions = [
@@ -44,10 +45,10 @@ const conditions = [
 ];
 
 const testimonials = [
-  { name: "Samantha Gingras", condition: "Depression", text: "I battled depression for years. The therapy and support groups here helped me regain control of my life. The team is compassionate and truly listens." },
-  { name: "Phillip Williams", condition: "Anxiety", text: "Opening up about my mental health struggles was the most liberating thing I have ever done. This practice gave me the safe space I needed to heal." },
-  { name: "Priya Shanku", condition: "Bipolar Disorder", text: "Recovery is a journey, not a destination. Both therapy and medication played crucial roles in my healing. I am grateful for the personalized care." },
-  { name: "Sabine Thais", condition: "PTSD", text: "Having a supportive environment is key to mental wellness. Diatan Health provided exactly that — a warm, inclusive space where I felt truly understood." },
+  { name: "Samantha Gingras", condition: "Depression", text: "I battled depression for years. The therapy and support here helped me regain control of my life. The team is compassionate and truly listens — I finally feel like myself again." },
+  { name: "Phillip Williams", condition: "Anxiety", text: "Opening up about my mental health struggles was the most liberating thing I have ever done. This practice gave me the safe space I needed to heal and move forward." },
+  { name: "Priya Shanku", condition: "Bipolar Disorder", text: "Recovery is a journey, not a destination. Both therapy and medication played crucial roles in my healing. I am genuinely grateful for the personalized, patient care I received." },
+  { name: "Sabine Thais", condition: "PTSD", text: "Having a supportive environment is the foundation of mental wellness. Diatan Health provided exactly that — a warm, inclusive space where I felt truly understood and not judged." },
 ];
 
 const insuranceList = [
@@ -57,12 +58,12 @@ const insuranceList = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 28 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.65,
+      duration: 0.7,
       delay: i * 0.1,
       ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
     },
@@ -70,246 +71,338 @@ const fadeUp = {
 };
 
 const stagger = {
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
+
+function ServiceAccordion() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <div className="max-w-3xl mx-auto divide-y" style={{ borderColor: "#E8DDD0" }}>
+      {services.map((service, i) => {
+        const isOpen = openIndex === i;
+        return (
+          <motion.div
+            key={service.name}
+            initial={{ opacity: 0, x: -12 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: i * 0.04 }}
+          >
+            <button
+              type="button"
+              onClick={() => setOpenIndex(isOpen ? null : i)}
+              aria-expanded={isOpen}
+              className="w-full flex items-center gap-5 py-5 px-2 text-left group transition-colors duration-200 hover:bg-[#FDF4EC] rounded-lg -mx-2 px-2"
+            >
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-300"
+                style={{
+                  backgroundColor: isOpen ? "#2D7A4F" : "#F5EDE4",
+                }}
+              >
+                <service.icon
+                  className="w-5 h-5 transition-colors duration-300"
+                  style={{ color: isOpen ? "#FFFFFF" : "#C17F59" }}
+                  aria-hidden="true"
+                />
+              </div>
+              <span
+                className="flex-1 font-semibold text-base font-inter"
+                style={{
+                  color: isOpen ? "#2D7A4F" : "#2A2520",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
+                }}
+              >
+                {service.name}
+              </span>
+              <ChevronDown
+                className="w-5 h-5 shrink-0 transition-transform duration-300"
+                style={{
+                  color: "#C17F59",
+                  transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                }}
+                aria-hidden="true"
+              />
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ overflow: "hidden" }}
+                >
+                  <p
+                    className="pb-5 pl-[60px] pr-8 text-sm leading-relaxed font-inter"
+                    style={{
+                      color: "#6B5E52",
+                      fontFamily: "var(--font-inter), system-ui, sans-serif",
+                    }}
+                  >
+                    {service.desc}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
+function TestimonialCarousel() {
+  const [current, setCurrent] = useState(0);
+
+  const prev = () => setCurrent((c) => (c === 0 ? testimonials.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
+
+  const t = testimonials[current];
+
+  return (
+    <div className="max-w-2xl mx-auto text-center">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -16 }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Quote
+            className="w-10 h-10 mx-auto mb-6"
+            style={{ color: "#C17F59", opacity: 0.7 }}
+            aria-hidden="true"
+          />
+          <p
+            className="text-xl sm:text-2xl leading-relaxed italic mb-8 font-lora"
+            style={{
+              color: "#2A2520",
+              fontFamily: "var(--font-lora), Georgia, serif",
+            }}
+          >
+            &ldquo;{t.text}&rdquo;
+          </p>
+          <div className="flex justify-center mb-3" aria-label="5 out of 5 stars">
+            {[...Array(5)].map((_, idx) => (
+              <Star
+                key={idx}
+                className="w-4 h-4"
+                style={{ color: "#C17F59", fill: "#C17F59" }}
+                aria-hidden="true"
+              />
+            ))}
+          </div>
+          <p
+            className="font-semibold text-base font-inter"
+            style={{ color: "#2A2520", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+          >
+            {t.name}
+          </p>
+          <span
+            className="inline-block mt-2 px-3 py-1 rounded-full text-xs font-medium font-inter"
+            style={{
+              backgroundColor: "#F5EDE4",
+              color: "#C17F59",
+              border: "1px solid #E8CDB8",
+              fontFamily: "var(--font-inter), system-ui, sans-serif",
+            }}
+          >
+            {t.condition}
+          </span>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Navigation dots + arrows */}
+      <div className="flex items-center justify-center gap-6 mt-10">
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Previous testimonial"
+          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+          style={{ backgroundColor: "#F5EDE4", color: "#C17F59", border: "1px solid #E8CDB8" }}
+        >
+          <ChevronRight className="w-4 h-4 rotate-180" aria-hidden="true" />
+        </button>
+        <div className="flex gap-2">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setCurrent(i)}
+              aria-label={`Go to testimonial ${i + 1}`}
+              className="transition-all duration-300 rounded-full"
+              style={{
+                width: i === current ? "24px" : "8px",
+                height: "8px",
+                backgroundColor: i === current ? "#C17F59" : "#E8CDB8",
+              }}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Next testimonial"
+          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+          style={{ backgroundColor: "#F5EDE4", color: "#C17F59", border: "1px solid #E8CDB8" }}
+        >
+          <ChevronRight className="w-4 h-4" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   return (
     <>
-      {/* ── HERO ────────────────────────────────────────────────────── */}
+      {/* ── HERO ── Centered, single-column, Headspace-inspired ──────── */}
       <section
         className="relative overflow-hidden"
         style={{
           minHeight: "92vh",
-          background: "linear-gradient(160deg, #EDF7EE 0%, #FFF8F0 45%, #F0EDF8 100%)",
+          background: "linear-gradient(170deg, #FFF8F0 0%, #FAF0E6 40%, #F5EDE4 100%)",
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        {/* Organic background blobs */}
+        {/* Warm organic background blobs */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-32 -left-32 w-[520px] h-[520px] opacity-25 blob"
-          style={{ background: "radial-gradient(circle, #A8D5BA 0%, transparent 70%)" }}
+          className="pointer-events-none absolute -top-24 -left-24 w-[480px] h-[480px] opacity-30 blob"
+          style={{ background: "radial-gradient(circle, #D4A875 0%, transparent 70%)" }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute top-1/3 -right-24 w-[380px] h-[380px] opacity-20 blob-2"
-          style={{ background: "radial-gradient(circle, #C8B4E0 0%, transparent 70%)" }}
+          className="pointer-events-none absolute top-1/2 -right-32 w-[360px] h-[360px] opacity-20 blob-2"
+          style={{ background: "radial-gradient(circle, #2D7A4F 0%, transparent 70%)" }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 left-1/4 w-[300px] h-[300px] opacity-15 blob"
-          style={{ background: "radial-gradient(circle, #8FBC8F 0%, transparent 70%)" }}
+          className="pointer-events-none absolute -bottom-16 left-1/3 w-[320px] h-[320px] opacity-15 blob"
+          style={{ background: "radial-gradient(circle, #C17F59 0%, transparent 70%)" }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-36">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* LEFT: Copy */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={stagger}
-            >
-              <motion.div variants={fadeUp} custom={0}>
-                <span
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase mb-8 font-inter"
-                  style={{
-                    backgroundColor: "#EEF7EE",
-                    color: "#2D9E60",
-                    border: "1px solid #A8D5BA",
-                    fontFamily: "var(--font-inter), system-ui, sans-serif",
-                  }}
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#2D9E60] inline-block" />
-                  PMHNP-BC Certified Care
-                </span>
-              </motion.div>
-
-              <motion.h1
-                variants={fadeUp}
-                custom={1}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-7 font-lora"
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+            className="flex flex-col items-center"
+          >
+            <motion.div variants={fadeUp} custom={0}>
+              <span
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase mb-8 font-inter"
                 style={{
-                  color: "#2C3E50",
-                  fontFamily: "var(--font-lora), Georgia, serif",
-                }}
-              >
-                Where Mental{" "}
-                <span style={{ color: "#2D9E60" }}>Wellness</span>
-                <br />
-                Is Our Priority
-              </motion.h1>
-
-              <motion.p
-                variants={fadeUp}
-                custom={2}
-                className="text-lg sm:text-xl leading-relaxed mb-10 font-inter"
-                style={{
-                  color: "#5A5047",
-                  maxWidth: "520px",
+                  backgroundColor: "#F5EDE4",
+                  color: "#C17F59",
+                  border: "1px solid #E8CDB8",
                   fontFamily: "var(--font-inter), system-ui, sans-serif",
                 }}
               >
-                Compassionate, evidence-based psychiatric and mental health care
-                for individuals and families in Lauderhill, FL. In-person and
-                telepsychiatry available.
-              </motion.p>
-
-              <motion.div
-                variants={fadeUp}
-                custom={3}
-                className="flex flex-col sm:flex-row gap-4 mb-10"
-              >
-                <Button
-                  asChild
-                  size="lg"
-                  className="text-base font-semibold px-8 py-6 rounded-xl btn-breathe font-inter"
-                  style={{
-                    backgroundColor: "#2D9E60",
-                    color: "#FFFFFF",
-                    fontFamily: "var(--font-inter), system-ui, sans-serif",
-                  }}
-                >
-                  <Link href="/book-appointment">
-                    <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
-                    Book an Appointment
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="text-base font-semibold px-8 py-6 rounded-xl font-inter"
-                  style={{
-                    borderColor: "#C8D8CC",
-                    color: "#2D9E60",
-                    backgroundColor: "transparent",
-                    fontFamily: "var(--font-inter), system-ui, sans-serif",
-                  }}
-                >
-                  <Link href="/services">
-                    Our Services
-                    <ChevronRight className="w-5 h-5 ml-2" aria-hidden="true" />
-                  </Link>
-                </Button>
-              </motion.div>
-
-              <motion.div variants={fadeUp} custom={4} className="flex flex-wrap gap-5">
-                {[
-                  "Evidence-Based Treatment",
-                  "Telepsychiatry Available",
-                  "Insurance Accepted",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-2">
-                    <CheckCircle2
-                      className="w-4.5 h-4.5 shrink-0"
-                      style={{ color: "#2D9E60" }}
-                      aria-hidden="true"
-                    />
-                    <span
-                      className="text-sm font-medium font-inter"
-                      style={{ color: "#5A5047", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                    >
-                      {item}
-                    </span>
-                  </div>
-                ))}
-              </motion.div>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C17F59] inline-block" />
+                PMHNP-BC Certified Care · Lauderhill, FL
+              </span>
             </motion.div>
 
-            {/* RIGHT: Practice card */}
-            <motion.div
-              initial={{ opacity: 0, x: 48 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="hidden lg:flex items-center justify-center"
+            <motion.h1
+              variants={fadeUp}
+              custom={1}
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-7 font-lora"
+              style={{
+                color: "#2A2520",
+                fontFamily: "var(--font-lora), Georgia, serif",
+              }}
             >
-              <div
-                className="rounded-3xl p-8 shadow-2xl relative overflow-hidden"
+              Your mind deserves{" "}
+              <span style={{ color: "#2D7A4F" }}>real care.</span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp}
+              custom={2}
+              className="text-lg sm:text-xl leading-relaxed mb-10 font-inter"
+              style={{
+                color: "#6B5E52",
+                maxWidth: "540px",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
+            >
+              Compassionate psychiatric and mental health care for individuals
+              and families — in-person in Lauderhill and via secure telepsychiatry
+              across Florida.
+            </motion.p>
+
+            <motion.div
+              variants={fadeUp}
+              custom={3}
+              className="flex flex-col sm:flex-row gap-4 mb-12 justify-center"
+            >
+              <Button
+                asChild
+                size="lg"
+                className="text-base font-semibold px-8 py-6 rounded-xl btn-breathe font-inter"
                 style={{
-                  backgroundColor: "#FFFFFF",
-                  maxWidth: "420px",
-                  width: "100%",
-                  border: "1px solid #E8DDD0",
+                  backgroundColor: "#2D7A4F",
+                  color: "#FFFFFF",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
                 }}
               >
-                {/* Subtle inner blob */}
-                <div
-                  aria-hidden="true"
-                  className="absolute -top-16 -right-16 w-40 h-40 blob opacity-20"
-                  style={{ background: "radial-gradient(circle, #A8D5BA, transparent)" }}
-                />
-                <div className="relative text-center mb-7">
-                  <Image
-                    src="/images/logo.png"
-                    alt="Diatan Health Services"
-                    width={72}
-                    height={72}
-                    className="mx-auto rounded-2xl mb-4"
-                  />
-                  <h2
-                    className="font-bold text-xl mb-1 font-lora"
-                    style={{ color: "#2C3E50", fontFamily: "var(--font-lora), Georgia, serif" }}
-                  >
-                    Diatan Health Services
-                  </h2>
-                  <p
-                    className="text-sm font-inter"
-                    style={{ color: "#2D9E60", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                  >
-                    Psychiatric &amp; Mental Health Care
-                  </p>
-                </div>
-                <div className="space-y-3">
-                  {[
-                    { label: "Location", value: "Lauderhill, FL 33313", icon: "📍" },
-                    { label: "Phone", value: "(954) 347-5845", icon: "📞" },
-                    { label: "Hours", value: "Monday – Friday", icon: "🕐" },
-                    { label: "Services", value: "In-Person & Telehealth", icon: "💻" },
-                  ].map((item) => (
-                    <div
-                      key={item.label}
-                      className="flex items-center gap-3 p-3 rounded-xl"
-                      style={{ backgroundColor: "#F9F5F0" }}
-                    >
-                      <span className="text-lg shrink-0" role="img" aria-label={item.label}>
-                        {item.icon}
-                      </span>
-                      <div>
-                        <div
-                          className="text-xs font-medium font-inter"
-                          style={{ color: "#9A8F86", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                        >
-                          {item.label}
-                        </div>
-                        <div
-                          className="text-sm font-semibold font-inter"
-                          style={{ color: "#2C3E50", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                        >
-                          {item.value}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <Button
-                  asChild
-                  className="w-full mt-6 font-semibold rounded-xl font-inter"
-                  style={{ backgroundColor: "#2D9E60", color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                >
-                  <a href="tel:9543475845">
-                    <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
-                    Call Now
-                  </a>
-                </Button>
-              </div>
+                <Link href="/book-appointment">
+                  <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
+                  Book an Appointment
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="text-base font-semibold px-8 py-6 rounded-xl font-inter"
+                style={{
+                  borderColor: "#E8CDB8",
+                  color: "#C17F59",
+                  backgroundColor: "transparent",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
+                }}
+              >
+                <Link href="/services">
+                  Our Services
+                  <ChevronRight className="w-5 h-5 ml-2" aria-hidden="true" />
+                </Link>
+              </Button>
             </motion.div>
-          </div>
+
+            <motion.div variants={fadeUp} custom={4} className="flex flex-wrap gap-5 justify-center">
+              {[
+                "Evidence-Based Treatment",
+                "Telepsychiatry Available",
+                "Insurance Accepted",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-2">
+                  <CheckCircle2
+                    className="w-4 h-4 shrink-0"
+                    style={{ color: "#2D7A4F" }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="text-sm font-medium font-inter"
+                    style={{ color: "#6B5E52", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+                  >
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ── SERVICES ─────────────────────────────────────────────────── */}
+      {/* ── SERVICES ── Accordion / stacked list ─────────────────────── */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -319,73 +412,42 @@ export default function HomePage() {
           >
             <span
               className="inline-block px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wide mb-5 font-inter"
-              style={{ backgroundColor: "#EEF7EE", color: "#2D9E60", border: "1px solid #A8D5BA", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{
+                backgroundColor: "#F5EDE4",
+                color: "#C17F59",
+                border: "1px solid #E8CDB8",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
             >
               Our Services
             </span>
             <h2
               className="text-4xl sm:text-5xl font-bold mb-5 font-lora"
-              style={{ color: "#2C3E50", fontFamily: "var(--font-lora), Georgia, serif" }}
+              style={{ color: "#2A2520", fontFamily: "var(--font-lora), Georgia, serif" }}
             >
               Comprehensive Mental Health Care
             </h2>
             <p
               className="text-lg max-w-xl mx-auto font-inter"
-              style={{ color: "#7A7062", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{ color: "#6B5E52", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
             >
-              A full spectrum of psychiatric and mental health services, delivered
-              with compassion and evidence-based practices.
+              A full spectrum of psychiatric and mental health services —
+              delivered with compassion and clinical precision.
             </p>
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={stagger}
-            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px"
-            style={{ backgroundColor: "#E8DDD0", borderRadius: "1.25rem", overflow: "hidden" }}
-          >
-            {services.map((service, i) => (
-              <motion.div
-                key={service.name}
-                variants={fadeUp}
-                custom={i * 0.05}
-                className="group flex flex-col items-start gap-3 p-6 transition-all duration-300 hover:bg-[#EEF7EE]"
-                style={{ backgroundColor: "#FFFFFF" }}
-              >
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-[#2D9E60]"
-                  style={{ backgroundColor: "#EEF7EE" }}
-                >
-                  <service.icon
-                    className="w-5 h-5 transition-colors duration-300 group-hover:text-white"
-                    style={{ color: "#2D9E60" }}
-                    aria-hidden="true"
-                  />
-                </div>
-                <h3
-                  className="font-semibold text-sm leading-tight font-inter"
-                  style={{ color: "#2C3E50", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                >
-                  {service.name}
-                </h3>
-                <p
-                  className="text-xs leading-relaxed font-inter"
-                  style={{ color: "#7A7062", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                >
-                  {service.desc}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+          <ServiceAccordion />
 
           <div className="text-center mt-12">
             <Button
               asChild
               variant="outline"
               className="font-semibold px-8 rounded-xl font-inter"
-              style={{ borderColor: "#A8D5BA", color: "#2D9E60", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{
+                borderColor: "#E8CDB8",
+                color: "#C17F59",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
             >
               <Link href="/services">
                 View All Services
@@ -397,8 +459,8 @@ export default function HomePage() {
       </section>
 
       {/* ── CONDITIONS ───────────────────────────────────────────────── */}
-      <section className="py-28" style={{ backgroundColor: "#F9F5F0" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-28" style={{ backgroundColor: "#FDF6EE" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -408,19 +470,23 @@ export default function HomePage() {
           >
             <span
               className="inline-block px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wide mb-5 font-inter"
-              style={{ backgroundColor: "#2D9E60", color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{
+                backgroundColor: "#2D7A4F",
+                color: "#FFFFFF",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
             >
               Conditions We Treat
             </span>
             <h2
               className="text-4xl sm:text-5xl font-bold mb-5 font-lora"
-              style={{ color: "#2C3E50", fontFamily: "var(--font-lora), Georgia, serif" }}
+              style={{ color: "#2A2520", fontFamily: "var(--font-lora), Georgia, serif" }}
             >
               You Are Not Alone
             </h2>
             <p
               className="text-lg max-w-xl mx-auto font-inter"
-              style={{ color: "#7A7062", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{ color: "#6B5E52", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
             >
               We provide expert care for a wide range of mental health conditions.
               Whatever you are facing, we are here to help.
@@ -438,11 +504,11 @@ export default function HomePage() {
               <motion.div key={condition} variants={fadeUp} custom={i * 0.04}>
                 <Link href="/conditions">
                   <span
-                    className="inline-block px-5 py-2.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-300 hover:border-[#2D9E60] hover:text-[#2D9E60] hover:shadow-sm font-inter"
+                    className="inline-block px-5 py-2.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-300 hover:border-[#2D7A4F] hover:text-[#2D7A4F] hover:shadow-sm font-inter"
                     style={{
                       backgroundColor: "#FFFFFF",
-                      color: "#2C3E50",
-                      border: "1px solid #E8DDD0",
+                      color: "#2A2520",
+                      border: "1px solid #E8CDB8",
                       fontFamily: "var(--font-inter), system-ui, sans-serif",
                     }}
                   >
@@ -454,9 +520,13 @@ export default function HomePage() {
             <Link href="/conditions">
               <span
                 className="inline-block px-5 py-2.5 rounded-full text-sm font-semibold cursor-pointer font-inter"
-                style={{ backgroundColor: "#2D9E60", color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+                style={{
+                  backgroundColor: "#2D7A4F",
+                  color: "#FFFFFF",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
+                }}
               >
-                +14 More →
+                +14 More &rarr;
               </span>
             </Link>
           </motion.div>
@@ -465,7 +535,11 @@ export default function HomePage() {
             <Button
               asChild
               className="font-semibold px-8 rounded-xl font-inter"
-              style={{ backgroundColor: "#2D9E60", color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{
+                backgroundColor: "#2D7A4F",
+                color: "#FFFFFF",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
             >
               <Link href="/conditions">View All Conditions</Link>
             </Button>
@@ -473,11 +547,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── TELEPSYCHIATRY CTA ───────────────────────────────────────── */}
+      {/* ── TELEPSYCHIATRY CTA ── Centered, not 2-col ───────────────── */}
       <section
         className="py-28 relative overflow-hidden"
         style={{
-          background: "linear-gradient(135deg, #1A6B3C 0%, #2D9E60 50%, #3DAA7A 100%)",
+          background: "linear-gradient(160deg, #1E5C38 0%, #2D7A4F 55%, #3A8F60 100%)",
         }}
       >
         <div
@@ -491,105 +565,78 @@ export default function HomePage() {
           style={{ background: "radial-gradient(circle, #FFFFFF, transparent)" }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -32 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7 }}
-              style={{ color: "#FFFFFF" }}
-            >
-              <span
-                className="inline-block px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wide mb-6 font-inter"
-                style={{ backgroundColor: "rgba(255,255,255,0.15)", color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-              >
-                Telehealth Available
-              </span>
-              <h2
-                className="text-4xl sm:text-5xl font-bold mb-6 leading-tight font-lora"
-                style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-              >
-                Quality Care From
-                <br />
-                the Comfort of Home
-              </h2>
-              <p
-                className="text-lg opacity-85 leading-relaxed mb-8 font-inter"
-                style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-              >
-                Our secure telepsychiatry platform connects you with our team via
-                video or phone — no commute, no waiting room. Same compassionate
-                care, wherever you are.
-              </p>
-              <ul className="space-y-3 mb-10">
-                {[
-                  "HIPAA-compliant video platform",
-                  "Available via phone or video",
-                  "Prescription management included",
-                  "Most insurance plans accepted",
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 shrink-0 opacity-80" aria-hidden="true" />
-                    <span
-                      className="opacity-85 font-inter"
-                      style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                    >
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <Button
-                asChild
-                size="lg"
-                className="font-semibold px-8 rounded-xl font-inter"
-                style={{ backgroundColor: "#FFFFFF", color: "#2D9E60", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-              >
-                <Link href="/telepsychiatry">
-                  <Video className="w-5 h-5 mr-2" aria-hidden="true" />
-                  Learn About Telepsychiatry
-                </Link>
-              </Button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="hidden lg:flex items-center justify-center"
-            >
-              <div
-                className="rounded-3xl p-12 text-center"
-                style={{ backgroundColor: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)" }}
-              >
-                <Video
-                  className="w-20 h-20 mx-auto mb-6 opacity-90"
-                  style={{ color: "#FFFFFF" }}
-                  aria-hidden="true"
-                />
-                <p
-                  className="text-2xl font-bold mb-2 font-lora"
-                  style={{ color: "#FFFFFF", fontFamily: "var(--font-lora), Georgia, serif" }}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.65 }}
+          className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
+          <span
+            className="inline-block px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wide mb-6 font-inter"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.15)",
+              color: "#FFFFFF",
+              fontFamily: "var(--font-inter), system-ui, sans-serif",
+            }}
+          >
+            Telehealth Available
+          </span>
+          <h2
+            className="text-4xl sm:text-5xl font-bold mb-6 leading-tight font-lora text-white"
+            style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+          >
+            Quality Care From the Comfort of Home
+          </h2>
+          <p
+            className="text-lg opacity-85 leading-relaxed mb-8 font-inter text-white"
+            style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+          >
+            Our secure telepsychiatry platform connects you with our team via
+            video or phone. No commute, no waiting room. Same compassionate care,
+            wherever you are in Florida.
+          </p>
+          <ul className="space-y-3 mb-10 text-left inline-block">
+            {[
+              "HIPAA-compliant video platform",
+              "Available via phone or video",
+              "Prescription management included",
+              "Most insurance plans accepted",
+            ].map((item) => (
+              <li key={item} className="flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 shrink-0 opacity-80 text-white" aria-hidden="true" />
+                <span
+                  className="opacity-85 font-inter text-white"
+                  style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
                 >
-                  Start Your Session Today
-                </p>
-                <p
-                  className="opacity-75 font-inter"
-                  style={{ color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                >
-                  Book online or call (954) 347-5845
-                </p>
-              </div>
-            </motion.div>
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div>
+            <Button
+              asChild
+              size="lg"
+              className="font-semibold px-8 rounded-xl font-inter"
+              style={{
+                backgroundColor: "#FFFFFF",
+                color: "#2D7A4F",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
+            >
+              <Link href="/telepsychiatry">
+                <Video className="w-5 h-5 mr-2" aria-hidden="true" />
+                Learn About Telepsychiatry
+              </Link>
+            </Button>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* ── TESTIMONIALS ─────────────────────────────────────────────── */}
+      {/* ── TESTIMONIALS ── Single-quote carousel ────────────────────── */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -599,76 +646,30 @@ export default function HomePage() {
           >
             <span
               className="inline-block px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wide mb-5 font-inter"
-              style={{ backgroundColor: "#EEF7EE", color: "#2D9E60", border: "1px solid #A8D5BA", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{
+                backgroundColor: "#F5EDE4",
+                color: "#C17F59",
+                border: "1px solid #E8CDB8",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
             >
               Patient Stories
             </span>
             <h2
               className="text-4xl sm:text-5xl font-bold font-lora"
-              style={{ color: "#2C3E50", fontFamily: "var(--font-lora), Georgia, serif" }}
+              style={{ color: "#2A2520", fontFamily: "var(--font-lora), Georgia, serif" }}
             >
               Real People, Real Recovery
             </h2>
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={stagger}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={t.name}
-                variants={fadeUp}
-                custom={i * 0.1}
-                className="flex flex-col p-8 rounded-2xl relative overflow-hidden"
-                style={{
-                  backgroundColor: i % 2 === 0 ? "#F9F5F0" : "#EEF7EE",
-                  border: "1px solid #E8DDD0",
-                }}
-              >
-                <span className="quote-mark mb-2" aria-hidden="true">&ldquo;</span>
-                <p
-                  className="text-sm leading-relaxed italic flex-1 mb-6 font-inter"
-                  style={{ color: "#5A5047", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                >
-                  {t.text}
-                </p>
-                <div>
-                  <div className="flex mb-3" aria-label="5 out of 5 stars">
-                    {[...Array(5)].map((_, idx) => (
-                      <Star
-                        key={idx}
-                        className="w-4 h-4"
-                        style={{ color: "#D97706", fill: "#D97706" }}
-                        aria-hidden="true"
-                      />
-                    ))}
-                  </div>
-                  <p
-                    className="font-semibold text-sm font-inter"
-                    style={{ color: "#2C3E50", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                  >
-                    {t.name}
-                  </p>
-                  <span
-                    className="inline-block mt-1 px-2.5 py-0.5 rounded-full text-xs font-medium font-inter"
-                    style={{ backgroundColor: "#FFFFFF", color: "#2D9E60", border: "1px solid #A8D5BA", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-                  >
-                    {t.condition}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          <TestimonialCarousel />
         </div>
       </section>
 
-      {/* ── INSURANCE ────────────────────────────────────────────────── */}
-      <section className="py-28" style={{ backgroundColor: "#F9F5F0" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── INSURANCE ── Text list, no badges ───────────────────────── */}
+      <section className="py-28" style={{ backgroundColor: "#FDF6EE" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -678,19 +679,23 @@ export default function HomePage() {
           >
             <span
               className="inline-block px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wide mb-5 font-inter"
-              style={{ backgroundColor: "#2D9E60", color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{
+                backgroundColor: "#2D7A4F",
+                color: "#FFFFFF",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
             >
               Insurance &amp; Payment
             </span>
             <h2
               className="text-4xl sm:text-5xl font-bold mb-5 font-lora"
-              style={{ color: "#2C3E50", fontFamily: "var(--font-lora), Georgia, serif" }}
+              style={{ color: "#2A2520", fontFamily: "var(--font-lora), Georgia, serif" }}
             >
               We Accept Most Insurance Plans
             </h2>
             <p
               className="text-lg max-w-xl mx-auto font-inter"
-              style={{ color: "#7A7062", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{ color: "#6B5E52", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
             >
               We work with most major insurance providers to make mental health
               care accessible and affordable for everyone.
@@ -702,29 +707,28 @@ export default function HomePage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
             variants={stagger}
-            className="flex flex-wrap gap-3 justify-center mb-10"
+            className="flex flex-wrap gap-x-8 gap-y-3 justify-center mb-12"
           >
             {insuranceList.map((ins, i) => (
-              <motion.div key={ins} variants={fadeUp} custom={i * 0.04}>
-                <span
-                  className="inline-block px-5 py-2.5 rounded-xl text-sm font-medium font-inter"
-                  style={{
-                    backgroundColor: "#FFFFFF",
-                    border: "1px solid #E8DDD0",
-                    color: "#2C3E50",
-                    fontFamily: "var(--font-inter), system-ui, sans-serif",
-                  }}
-                >
-                  {ins}
-                </span>
-              </motion.div>
+              <motion.span
+                key={ins}
+                variants={fadeUp}
+                custom={i * 0.04}
+                className="text-sm font-medium font-inter"
+                style={{
+                  color: "#6B5E52",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
+                }}
+              >
+                {ins}
+              </motion.span>
             ))}
           </motion.div>
 
           <div className="text-center">
             <p
               className="text-sm mb-6 font-inter"
-              style={{ color: "#7A7062", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{ color: "#9A8F86", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
             >
               Not sure if your insurance is accepted? Contact us to verify.
             </p>
@@ -732,7 +736,11 @@ export default function HomePage() {
               <Button
                 asChild
                 className="font-semibold px-8 rounded-xl font-inter"
-                style={{ backgroundColor: "#2D9E60", color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+                style={{
+                  backgroundColor: "#2D7A4F",
+                  color: "#FFFFFF",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
+                }}
               >
                 <Link href="/book-appointment">Book an Appointment</Link>
               </Button>
@@ -740,7 +748,11 @@ export default function HomePage() {
                 asChild
                 variant="outline"
                 className="font-semibold px-8 rounded-xl font-inter"
-                style={{ borderColor: "#A8D5BA", color: "#2D9E60", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+                style={{
+                  borderColor: "#E8CDB8",
+                  color: "#C17F59",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
+                }}
               >
                 <a href="tel:9543475845">
                   <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
@@ -755,13 +767,13 @@ export default function HomePage() {
       {/* ── FINAL CTA ────────────────────────────────────────────────── */}
       <section
         className="py-28 relative overflow-hidden"
-        style={{ backgroundColor: "#2C3E50" }}
+        style={{ backgroundColor: "#2A2520" }}
       >
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
-            background: "radial-gradient(ellipse at 60% 50%, rgba(45,158,96,0.12) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at 60% 50%, rgba(45,122,79,0.15) 0%, transparent 70%)",
           }}
         />
         <motion.div
@@ -769,7 +781,7 @@ export default function HomePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.65 }}
-          className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+          className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
           <h2
             className="text-4xl sm:text-5xl font-bold mb-6 font-lora"
@@ -779,7 +791,7 @@ export default function HomePage() {
           </h2>
           <p
             className="text-lg mb-10 leading-relaxed font-inter"
-            style={{ color: "#A8B8C0", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+            style={{ color: "#B8A99A", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
           >
             Taking the first step is the hardest part. We are here to walk with
             you every step of the way. Schedule your appointment today.
@@ -789,7 +801,11 @@ export default function HomePage() {
               asChild
               size="lg"
               className="text-base font-semibold px-10 py-6 rounded-xl btn-breathe font-inter"
-              style={{ backgroundColor: "#2D9E60", color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{
+                backgroundColor: "#2D7A4F",
+                color: "#FFFFFF",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
             >
               <Link href="/book-appointment">
                 <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
@@ -801,7 +817,11 @@ export default function HomePage() {
               variant="outline"
               size="lg"
               className="text-base font-semibold px-10 py-6 rounded-xl font-inter"
-              style={{ borderColor: "rgba(255,255,255,0.25)", color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              style={{
+                borderColor: "rgba(255,255,255,0.2)",
+                color: "#FFFFFF",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
             >
               <a href="tel:9543475845">
                 <Phone className="w-5 h-5 mr-2" aria-hidden="true" />
