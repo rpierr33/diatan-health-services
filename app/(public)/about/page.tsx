@@ -260,12 +260,10 @@ export default function AboutPage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto gap-8">
             {[
-              { src: "/doctor-4.png", name: "Dr. Jean Diatan", title: "Founder & Lead Psychiatrist", bio: "Board-certified with over 15 years of experience in psychiatric care." },
-              { src: "/doctor-2.png", name: "Dr. Marie Joseph", title: "PMHNP-BC", bio: "Specializes in mood disorders and medication management." },
-              { src: "/doctor-3.png", name: "Dr. Sarah Laurent", title: "PMHNP-BC", bio: "Expert in anxiety, PTSD, and trauma-informed care." },
-              { src: "/doctor-1.png", name: "Dr. Claire Beaumont", title: "Clinical Therapist", bio: "Focuses on individual therapy and psychoeducation." },
+              { src: "/dr-diatan.jpg", name: "Dr. Diatan", title: "Founder & Lead Psychiatrist, PMHNP-BC", bio: "Board-certified psychiatric professional with over 15 years of experience. Founder of Diatan Health Services, dedicated to providing compassionate, personalized mental health care." },
+              { src: "/provider-2.jpg", name: "Provider", title: "PMHNP-BC", bio: "Specializes in psychiatric evaluations, medication management, and evidence-based therapeutic approaches." },
             ].map((doc, i) => (
               <motion.div
                 key={doc.name}
