@@ -58,6 +58,27 @@ export default function BookAppointmentPage() {
         </div>
       </section>
 
+      {/* ZocDoc CTA */}
+      <section className="py-10 border-b" style={{ backgroundColor: "#F5EDE2", borderColor: "#E0CDB8" }}>
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm font-semibold mb-4" style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
+            Already on ZocDoc? Book directly with verified insurance info:
+          </p>
+          <a
+            href="https://www.zocdoc.com/practice/diatan-health-services-115310"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 text-base font-bold px-8 py-4 rounded-xl shadow-sm transition-all duration-200 hover:opacity-90 hover:shadow-md"
+            style={{ backgroundColor: "#3D5A3E", color: "#FFFFFF", fontFamily: "var(--font-body), system-ui, sans-serif" }}
+          >
+            Book Online via ZocDoc
+          </a>
+          <p className="text-xs mt-4" style={{ color: "#9A8F86", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
+            Or fill out the form below and we&apos;ll contact you within 1 business day.
+          </p>
+        </div>
+      </section>
+
       {/* Form */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">

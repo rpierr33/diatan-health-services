@@ -763,7 +763,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           >
             Book your appointment today. We are here to walk with you.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
             <Button
               asChild
               size="lg"
@@ -778,6 +778,26 @@ export default function HomeClient({ services, conditions, testimonials, insuran
                 <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
                 Book Your Appointment
               </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="text-base font-semibold px-10 py-6 rounded-xl"
+              style={{
+                borderColor: "rgba(255,251,245,0.3)",
+                color: "#FFFFFF",
+                backgroundColor: "transparent",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+              }}
+            >
+              <a
+                href="https://www.zocdoc.com/practice/diatan-health-services-115310"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book on ZocDoc
+              </a>
             </Button>
             <Button
               asChild

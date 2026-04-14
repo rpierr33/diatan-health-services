@@ -1,6 +1,6 @@
 "use client";
 
-import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -216,6 +216,28 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* Care imagery strip */}
+      <section className="relative overflow-hidden" style={{ height: "280px" }}>
+        <Image
+          src="/care-senior.jpg"
+          alt="Compassionate senior care at Diatan Health Services"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(255,251,245,0.7) 0%, transparent 50%, rgba(255,251,245,0.7) 100%)" }} />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <p className="text-lg font-semibold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
+              Serving Lauderhill, FL and surrounding communities
+            </p>
+            <p className="text-sm mt-1" style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
+              In-person &amp; telehealth options available
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Services list */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -274,7 +296,7 @@ export default function ServicesPage() {
           >
             Contact us today to schedule your initial consultation. We are here to help you find the right path to mental wellness.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
             <Button
               asChild
               size="lg"
@@ -285,6 +307,21 @@ export default function ServicesPage() {
                 <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
                 Book an Appointment
               </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="text-base font-semibold px-10 py-6 rounded-xl"
+              style={{ borderColor: "rgba(255,251,245,0.3)", color: "#FFFFFF", backgroundColor: "transparent", fontFamily: "var(--font-body), system-ui, sans-serif" }}
+            >
+              <a
+                href="https://www.zocdoc.com/practice/diatan-health-services-115310"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book on ZocDoc
+              </a>
             </Button>
             <Button
               asChild

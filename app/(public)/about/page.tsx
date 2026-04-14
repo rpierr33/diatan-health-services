@@ -82,7 +82,7 @@ export default function AboutPage() {
               className="flex items-center justify-center"
             >
               <div className="rounded-3xl p-8 shadow-sm text-center border" style={{ backgroundColor: "#FFFFFF", borderColor: "#E0CDB8", maxWidth: "380px", width: "100%" }}>
-                <Image src="/images/logo.png" alt="Diatan Health Services" width={100} height={100} className="mx-auto rounded-2xl mb-6" />
+                <Image src="/diatan-logo.png" alt="Diatan Health Services" width={100} height={100} className="mx-auto rounded-2xl mb-6" />
                 <h2 className="font-bold text-xl mb-1" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
                   Diatan Health Services, LLC
                 </h2>
@@ -205,11 +205,20 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-2xl p-8 border"
-              style={{ backgroundColor: "#FFFFFF", borderColor: "#E0CDB8" }}
+              className="rounded-2xl overflow-hidden border"
+              style={{ borderColor: "#E0CDB8" }}
             >
-              <div className="text-center mb-8">
-                <Award className="w-16 h-16 mx-auto mb-3" style={{ color: "#C4956A" }} aria-hidden="true" />
+              <div className="relative h-56 overflow-hidden">
+                <Image
+                  src="/care-elders.jpg"
+                  alt="Community care at Diatan Health Services"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              <div className="p-8 border-t" style={{ backgroundColor: "#FFFFFF", borderColor: "#E0CDB8" }}>
+              <div className="text-center mb-6">
                 <h3 className="font-bold text-xl" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
                   Our Practice Philosophy
                 </h3>
@@ -225,6 +234,7 @@ export default function AboutPage() {
                     <strong style={{ color: "#3D5A3E" }}>{item.label}:</strong>{" "}{item.text}
                   </p>
                 ))}
+              </div>
               </div>
             </motion.div>
           </div>

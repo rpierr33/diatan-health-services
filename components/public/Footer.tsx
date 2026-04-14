@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5">
               <Image
-                src="/images/logo.png"
+                src="/diatan-logo.png"
                 alt="Diatan Health Services"
                 width={38}
                 height={38}

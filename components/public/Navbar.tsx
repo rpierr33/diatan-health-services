@@ -53,7 +53,7 @@ export default function Navbar() {
             aria-label="Diatan Health Services - Home"
           >
             <Image
-              src="/images/logo.png"
+              src="/diatan-logo.png"
               alt="Diatan Health Services logo"
               width={40}
               height={40}
@@ -115,6 +115,20 @@ export default function Navbar() {
             >
               <Phone className="w-4 h-4" aria-hidden="true" />
               <span className="hidden md:inline">(954) 347-5845</span>
+            </a>
+            <a
+              href="https://www.zocdoc.com/practice/diatan-health-services-115310"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-lg border transition-all duration-200 hover:opacity-80"
+              style={{
+                color: "#3D5A3E",
+                borderColor: "#3D5A3E",
+                backgroundColor: "transparent",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+              }}
+            >
+              Book on ZocDoc
             </a>
             <Button
               asChild
@@ -184,6 +198,15 @@ export default function Navbar() {
                   Book Appointment
                 </Link>
               </Button>
+              <a
+                href="https://www.zocdoc.com/practice/diatan-health-services-115310"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 mt-3 py-2.5 text-sm font-semibold rounded-lg border transition-colors"
+                style={{ color: "#3D5A3E", borderColor: "#3D5A3E", backgroundColor: "transparent" }}
+              >
+                Book on ZocDoc
+              </a>
               <a
                 href="tel:9543475845"
                 className="flex items-center justify-center gap-2 mt-3 py-2 text-sm font-medium"

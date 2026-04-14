@@ -1,9 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Phone, Calendar } from "lucide-react";
+
+const CATEGORY_IMAGES: Record<string, string> = {
+  "Mood Disorders": "/condition-depression.jpg",
+  "Anxiety & Related": "/condition-anxiety.jpg",
+  "Trauma & Stress": "/condition-ocd.jpg",
+};
 
 const conditionCategories = [
   { category: "Mood Disorders", conditions: [{ name: "Major Depressive Disorder", desc: "A mood disorder causing persistent sadness, hopelessness, and loss of interest that significantly affects daily functioning." }, { name: "Bipolar Disorder", desc: "A mental condition characterized by extreme mood swings including emotional highs (mania) and lows (depression)." }, { name: "Depression", desc: "A common but serious mood disorder causing severe symptoms that affect how you feel, think, and handle daily activities." }] },
@@ -74,12 +81,34 @@ export default function ConditionsPage() {
                 viewport={{ once: true, margin: "-60px" }}
                 variants={sectionReveal}
               >
+                {CATEGORY_IMAGES[cat.category] && (
+                  <div className="relative h-48 rounded-2xl overflow-hidden mb-8">
+                    <Image
+                      src={CATEGORY_IMAGES[cat.category]}
+                      alt={`${cat.category} mental health conditions`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1280px) 100vw, 1200px"
+                    />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(255,251,245,0.85) 0%, rgba(255,251,245,0.4) 60%, transparent 100%)" }} />
+                    <div className="absolute inset-0 flex items-center px-8">
+                      <div className="flex items-center gap-3">
+                        <div className="w-1 h-8 rounded-full" style={{ backgroundColor: "#C4956A" }} aria-hidden="true" />
+                        <h2 className="text-2xl sm:text-3xl font-bold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
+                          {cat.category}
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {!CATEGORY_IMAGES[cat.category] && (
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-1 h-8 rounded-full" style={{ backgroundColor: "#C4956A" }} aria-hidden="true" />
                   <h2 className="text-2xl sm:text-3xl font-bold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
                     {cat.category}
                   </h2>
                 </div>
+                )}
 
                 {/* Flowing pill cloud */}
                 <motion.div
