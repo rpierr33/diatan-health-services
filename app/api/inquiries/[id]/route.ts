@@ -33,7 +33,32 @@ export async function PATCH(
     if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(updated);
   } catch (err) {
+    if (err instanceof z.ZodError) {
+      return NextResponse.json({ error: "Invalid input", details: err.issues }, { status: 400 });
+    }
     console.error("[inquiries PATCH]", err);
     return NextResponse.json({ error: "Failed to update" }, { status: 500 });
+  }
+}
+
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const authError = await requireAuth();
+  if (authError) return authError;
+
+  const { id } = await params;
+  const numId = parseInt(id, 10);
+  if (isNaN(numId)) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
+
+  try {
+    await db.delete(inquiries).where(eq(inquiries.id, numId));
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("[inquiries DELETE]", err);
+    return NextResponse.json({ error: "Failed to delete" }, { status: 500 });
   }
 }
