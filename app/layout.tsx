@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Lora, Inter } from "next/font/google";
+import { Libre_Baskerville, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
-const lora = Lora({
-  variable: "--font-lora",
+const libreBaskerville = Libre_Baskerville({
+  variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const sourceSans3 = Source_Sans_3({
+  variable: "--font-body",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -53,9 +54,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lora.variable} ${inter.variable} h-full antialiased`}
+      className={`${libreBaskerville.variable} ${sourceSans3.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-inter" style={{ backgroundColor: "#FFF8F0", color: "#2C3E50" }}>
+      <body
+        className="min-h-full flex flex-col"
+        style={{ backgroundColor: "#FFFBF5", color: "#2A2420", fontFamily: "var(--font-body), system-ui, sans-serif" }}
+      >
         {children}
         <Toaster richColors position="top-right" />
       </body>

@@ -5,7 +5,7 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 export default function Footer() {
   return (
     <footer
-      style={{ backgroundColor: "#1E2D3A", color: "#C4B8B0" }}
+      style={{ backgroundColor: "#2A2420", color: "#C4B8B0" }}
       role="contentinfo"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -21,83 +21,78 @@ export default function Footer() {
                 className="rounded-xl"
               />
               <span
-                className="font-semibold text-base font-lora"
+                className="font-semibold text-base"
                 style={{
-                  color: "#2D7A4F",
-                  fontFamily: "var(--font-lora), Georgia, serif",
+                  color: "#DEB896",
+                  fontFamily: "var(--font-heading), Georgia, serif",
                 }}
               >
                 Diatan Health Services
               </span>
             </Link>
             <p
-              className="text-sm leading-relaxed mb-6 font-inter"
-              style={{ color: "#8A9EA8", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              className="text-sm leading-relaxed mb-6"
+              style={{
+                color: "#8A7E78",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+              }}
             >
               Providing compassionate, evidence-based psychiatric and mental
               health care to our community.
             </p>
+            {/* Crisis box */}
             <div
               className="rounded-xl p-4 text-sm"
-              style={{ backgroundColor: "rgba(45,158,96,0.15)", border: "1px solid rgba(45,158,96,0.25)" }}
+              style={{
+                backgroundColor: "rgba(196, 149, 106, 0.12)",
+                border: "1px solid rgba(196, 149, 106, 0.25)",
+              }}
             >
               <p
-                className="font-semibold mb-2 font-inter"
-                style={{ color: "#2D7A4F", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+                className="font-semibold mb-2"
+                style={{
+                  color: "#DEB896",
+                  fontFamily: "var(--font-body), system-ui, sans-serif",
+                }}
               >
                 Crisis Support — 24/7
               </p>
-              <p className="font-inter" style={{ color: "#C4B8B0", fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
-                Call or Text: <strong style={{ color: "#FFFFFF" }}>988</strong>
+              <p
+                style={{
+                  color: "#C4B8B0",
+                  fontFamily: "var(--font-body), system-ui, sans-serif",
+                }}
+              >
+                Call or Text:{" "}
+                <strong style={{ color: "#FFFBF5" }}>988</strong>
               </p>
-              <p className="font-inter" style={{ color: "#C4B8B0", fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
-                Crisis Text Line: <strong style={{ color: "#FFFFFF" }}>HOME to 741741</strong>
+              <p
+                style={{
+                  color: "#C4B8B0",
+                  fontFamily: "var(--font-body), system-ui, sans-serif",
+                }}
+              >
+                Crisis Text Line:{" "}
+                <strong style={{ color: "#FFFBF5" }}>HOME to 741741</strong>
               </p>
             </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3
-              className="font-semibold text-sm uppercase tracking-wider mb-5 font-inter"
-              style={{ color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-            >
-              Quick Links
-            </h3>
-            <ul className="space-y-3 text-sm font-inter" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
-              {[
-                { href: "/services", label: "Our Services" },
-                { href: "/conditions", label: "Conditions Treated" },
-                { href: "/about", label: "About Us" },
-                { href: "/telepsychiatry", label: "Telepsychiatry" },
-                { href: "/book-appointment", label: "Book Appointment" },
-                { href: "/resources", label: "Resources & Blog" },
-                { href: "/careers", label: "Careers" },
-                { href: "/contact", label: "Contact Us" },
-                { href: "/faq", label: "FAQ" },
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="transition-colors duration-200 hover:text-[#2D7A4F]"
-                    style={{ color: "#8A9EA8" }}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Services */}
           <div>
             <h3
-              className="font-semibold text-sm uppercase tracking-wider mb-5 font-inter"
-              style={{ color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              className="font-semibold text-xs uppercase tracking-widest mb-5"
+              style={{
+                color: "#FFFBF5",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+              }}
             >
-              Our Services
+              Services
             </h3>
-            <ul className="space-y-3 text-sm font-inter" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
+            <ul
+              className="space-y-3 text-sm"
+              style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}
+            >
               {[
                 "Psychiatric Evaluations",
                 "Medication Management",
@@ -113,8 +108,8 @@ export default function Footer() {
                 <li key={service}>
                   <Link
                     href="/services"
-                    className="transition-colors duration-200 hover:text-[#2D7A4F]"
-                    style={{ color: "#8A9EA8" }}
+                    className="transition-colors duration-200 hover:text-[#DEB896]"
+                    style={{ color: "#8A7E78" }}
                   >
                     {service}
                   </Link>
@@ -123,22 +118,65 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Quick Links */}
           <div>
             <h3
-              className="font-semibold text-sm uppercase tracking-wider mb-5 font-inter"
-              style={{ color: "#FFFFFF", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+              className="font-semibold text-xs uppercase tracking-widest mb-5"
+              style={{
+                color: "#FFFBF5",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+              }}
             >
-              Contact Information
+              Quick Links
             </h3>
-            <ul className="space-y-4 text-sm font-inter" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
+            <ul
+              className="space-y-3 text-sm"
+              style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}
+            >
+              {[
+                { href: "/conditions", label: "Conditions Treated" },
+                { href: "/about", label: "About Us" },
+                { href: "/book-appointment", label: "Book Appointment" },
+                { href: "/resources", label: "Resources & Blog" },
+                { href: "/careers", label: "Careers" },
+                { href: "/contact", label: "Contact Us" },
+                { href: "/faq", label: "FAQ" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="transition-colors duration-200 hover:text-[#DEB896]"
+                    style={{ color: "#8A7E78" }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info + Hours */}
+          <div>
+            <h3
+              className="font-semibold text-xs uppercase tracking-widest mb-5"
+              style={{
+                color: "#FFFBF5",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+              }}
+            >
+              Contact
+            </h3>
+            <ul
+              className="space-y-4 text-sm mb-8"
+              style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}
+            >
               <li className="flex items-start gap-3">
                 <MapPin
                   className="w-4 h-4 mt-0.5 shrink-0"
-                  style={{ color: "#2D7A4F" }}
+                  style={{ color: "#C4956A" }}
                   aria-hidden="true"
                 />
-                <span style={{ color: "#8A9EA8" }}>
+                <span style={{ color: "#8A7E78" }}>
                   4200 NW 16th St. Suite 449
                   <br />
                   Lauderhill, FL 33313
@@ -147,13 +185,13 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Phone
                   className="w-4 h-4 shrink-0"
-                  style={{ color: "#2D7A4F" }}
+                  style={{ color: "#C4956A" }}
                   aria-hidden="true"
                 />
                 <a
                   href="tel:9543475845"
-                  className="transition-colors hover:text-[#2D7A4F]"
-                  style={{ color: "#8A9EA8" }}
+                  className="transition-colors hover:text-[#DEB896]"
+                  style={{ color: "#8A7E78" }}
                 >
                   (954) 347-5845
                 </a>
@@ -161,13 +199,13 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Mail
                   className="w-4 h-4 shrink-0"
-                  style={{ color: "#2D7A4F" }}
+                  style={{ color: "#C4956A" }}
                   aria-hidden="true"
                 />
                 <a
                   href="mailto:info@diatanhealthservices.com"
-                  className="transition-colors hover:text-[#2D7A4F] break-all"
-                  style={{ color: "#8A9EA8" }}
+                  className="transition-colors hover:text-[#DEB896] break-all"
+                  style={{ color: "#8A7E78" }}
                 >
                   info@diatanhealthservices.com
                 </a>
@@ -175,32 +213,64 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Clock
                   className="w-4 h-4 shrink-0"
-                  style={{ color: "#2D7A4F" }}
+                  style={{ color: "#C4956A" }}
                   aria-hidden="true"
                 />
-                <span style={{ color: "#8A9EA8" }}>Monday – Friday</span>
+                <span style={{ color: "#8A7E78" }}>Monday – Friday</span>
               </li>
             </ul>
+
+            {/* Crisis hotline repeated at bottom of contact col */}
+            <p
+              className="text-xs leading-relaxed"
+              style={{
+                color: "#6A5E58",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+              }}
+            >
+              Mental health crisis?{" "}
+              <a
+                href="tel:988"
+                className="underline underline-offset-2 hover:text-[#DEB896] transition-colors"
+                style={{ color: "#C4956A" }}
+              >
+                Call or text 988
+              </a>{" "}
+              — available 24/7.
+            </p>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div
-          className="mt-12 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-sm font-inter"
-          style={{ borderColor: "#2A3D4D", color: "#5A6E7A", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+          className="mt-12 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-xs"
+          style={{
+            borderColor: "rgba(196, 149, 106, 0.15)",
+            color: "#6A5E58",
+            fontFamily: "var(--font-body), system-ui, sans-serif",
+          }}
         >
           <p>
             &copy; {new Date().getFullYear()} Diatan Health Services, LLC. All
             rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/hipaa" className="transition-colors hover:text-[#2D7A4F]">
+            <Link
+              href="/hipaa"
+              className="transition-colors hover:text-[#DEB896]"
+            >
               HIPAA Notice
             </Link>
-            <Link href="/privacy" className="transition-colors hover:text-[#2D7A4F]">
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-[#DEB896]"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms" className="transition-colors hover:text-[#2D7A4F]">
+            <Link
+              href="/terms"
+              className="transition-colors hover:text-[#DEB896]"
+            >
               Terms of Service
             </Link>
           </div>
