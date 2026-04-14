@@ -55,9 +55,9 @@ export default function Navbar() {
             <Image
               src="/diatan-logo.png"
               alt="Diatan Health Services logo"
-              width={40}
-              height={40}
-              className="rounded-xl"
+              width={140}
+              height={56}
+              className="h-11 w-auto object-contain"
               priority
             />
             <div className="hidden sm:block">

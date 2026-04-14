@@ -16,8 +16,8 @@ export default function Footer() {
               <Image
                 src="/diatan-logo.png"
                 alt="Diatan Health Services"
-                width={38}
-                height={38}
+                width={140}
+                height={56}
                 className="rounded-xl"
               />
               <span
