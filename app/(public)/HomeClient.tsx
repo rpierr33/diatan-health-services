@@ -712,14 +712,14 @@ export default function HomeClient({ services, conditions, testimonials, insuran
       {/* ═══════════════════════════════════════════════════════
           INSURANCE
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-28" style={{ backgroundColor: "#F5EDE2" }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={sectionReveal}
-            className="mb-12"
+            className="text-center mb-14"
           >
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
@@ -731,51 +731,62 @@ export default function HomeClient({ services, conditions, testimonials, insuran
               Insurance &amp; Payment
             </span>
             <h2
-              className="text-4xl sm:text-5xl font-bold"
+              className="text-3xl sm:text-4xl font-bold mb-3"
               style={{
                 color: "#2A2420",
                 fontFamily: "var(--font-heading), Georgia, serif",
               }}
             >
-              Insurance We Accept
+              We Accept Most Major Plans
             </h2>
+            <p
+              className="text-base max-w-lg mx-auto"
+              style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}
+            >
+              Focus on your wellness — we handle the rest.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-wrap justify-center gap-3 mb-12"
+          >
+            {insuranceList.map((ins, i) => (
+              <motion.span
+                key={ins}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: i * 0.04 }}
+                className="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:shadow-md cursor-default"
+                style={{
+                  backgroundColor: "#FFFBF5",
+                  color: "#3D5A3E",
+                  border: "1px solid #D4C4B0",
+                  fontFamily: "var(--font-body), system-ui, sans-serif",
+                }}
+              >
+                {ins}
+              </motion.span>
+            ))}
           </motion.div>
 
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-base leading-loose mb-10"
-            style={{
-              color: "#6B5E52",
-              fontFamily: "var(--font-body), system-ui, sans-serif",
-            }}
-          >
-            {insuranceList.map((ins, i) => (
-              <span key={ins}>
-                {ins}
-                {i < insuranceList.length - 1 && (
-                  <span
-                    aria-hidden="true"
-                    style={{ color: "#E0CDB8", margin: "0 10px" }}
-                  >
-                    ·
-                  </span>
-                )}
-              </span>
-            ))}
-          </motion.p>
-
-          <p
-            className="text-sm mb-6"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center text-sm mb-8"
             style={{
               color: "#9A8F86",
               fontFamily: "var(--font-body), system-ui, sans-serif",
             }}
           >
-            Not sure if your insurance is accepted? Contact us to verify.
-          </p>
+            Don&apos;t see your plan? Contact us — we may still be able to help.
+          </motion.p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button
               asChild
