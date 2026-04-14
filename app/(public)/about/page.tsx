@@ -263,7 +263,6 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto gap-8">
             {[
               { src: "/dr-diatan.jpg", name: "Dr. Diatan", title: "Founder & Lead Psychiatrist, PMHNP-BC", bio: "Board-certified psychiatric professional with over 15 years of experience. Founder of Diatan Health Services, dedicated to providing compassionate, personalized mental health care." },
-              { src: "/provider-2.jpg", name: "Provider", title: "PMHNP-BC", bio: "Specializes in psychiatric evaluations, medication management, and evidence-based therapeutic approaches." },
             ].map((doc, i) => (
               <motion.div
                 key={doc.name}
