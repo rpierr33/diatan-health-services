@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -618,6 +619,96 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           </motion.div>
 
           <TestimonialCarousel testimonials={testimonials} />
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          MEET OUR PROVIDERS
+         ═══════════════════════════════════════════════════════ */}
+      <section className="py-28" style={{ backgroundColor: "#FFFBF5" }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={sectionReveal}
+            className="text-center mb-16"
+          >
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
+              style={{ color: "#C4956A", fontFamily: "var(--font-body), system-ui, sans-serif" }}
+            >
+              Our Team
+            </span>
+            <h2
+              className="text-4xl sm:text-5xl font-bold"
+              style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}
+            >
+              Meet Our Providers
+            </h2>
+            <p
+              className="mt-4 text-base max-w-xl mx-auto"
+              style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}
+            >
+              Board-certified psychiatric professionals dedicated to your mental wellness.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { src: "/doctor-4.png", name: "Dr. Jean Diatan", title: "Founder & Lead Psychiatrist" },
+              { src: "/doctor-2.png", name: "Dr. Marie Joseph", title: "PMHNP-BC" },
+              { src: "/doctor-3.png", name: "Dr. Sarah Laurent", title: "PMHNP-BC" },
+              { src: "/doctor-1.png", name: "Dr. Claire Beaumont", title: "Clinical Therapist" },
+            ].map((doc, i) => (
+              <motion.div
+                key={doc.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden mb-4">
+                  <Image
+                    src={doc.src}
+                    alt={doc.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                </div>
+                <h3
+                  className="text-base font-semibold"
+                  style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}
+                >
+                  {doc.name}
+                </h3>
+                <p
+                  className="text-sm mt-1"
+                  style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}
+                >
+                  {doc.title}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mt-12"
+          >
+            <Link
+              href="/about"
+              className="inline-flex items-center text-sm font-semibold transition-colors hover:opacity-80"
+              style={{ color: "#3D5A3E", fontFamily: "var(--font-body), system-ui, sans-serif" }}
+            >
+              Learn more about our team →
+            </Link>
+          </motion.div>
         </div>
       </section>
 

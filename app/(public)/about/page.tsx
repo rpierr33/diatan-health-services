@@ -242,6 +242,52 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
+      {/* Our Providers */}
+      <section className="py-28" style={{ backgroundColor: "#FFFBF5" }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={sectionReveal}
+            className="text-center mb-16"
+          >
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C4956A", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
+              Our Providers
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
+              The People Behind Your Care
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { src: "/doctor-4.png", name: "Dr. Jean Diatan", title: "Founder & Lead Psychiatrist", bio: "Board-certified with over 15 years of experience in psychiatric care." },
+              { src: "/doctor-2.png", name: "Dr. Marie Joseph", title: "PMHNP-BC", bio: "Specializes in mood disorders and medication management." },
+              { src: "/doctor-3.png", name: "Dr. Sarah Laurent", title: "PMHNP-BC", bio: "Expert in anxiety, PTSD, and trauma-informed care." },
+              { src: "/doctor-1.png", name: "Dr. Claire Beaumont", title: "Clinical Therapist", bio: "Focuses on individual therapy and psychoeducation." },
+            ].map((doc, i) => (
+              <motion.div
+                key={doc.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden mb-4">
+                  <Image src={doc.src} alt={doc.name} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+                </div>
+                <h3 className="text-base font-semibold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>{doc.name}</h3>
+                <p className="text-sm mt-1" style={{ color: "#3D5A3E", fontFamily: "var(--font-body), system-ui, sans-serif" }}>{doc.title}</p>
+                <p className="text-xs mt-2" style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}>{doc.bio}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
       <section className="py-28 relative overflow-hidden" style={{ backgroundColor: "#2A2420" }}>
         <div aria-hidden="true" className="pointer-events-none absolute" style={{ top: "-80px", right: "-80px", width: "360px", height: "360px", borderRadius: "50%", background: "radial-gradient(circle, rgba(196,149,106,0.12) 0%, transparent 70%)" }} />
         <motion.div
@@ -252,7 +298,7 @@ export default function AboutPage() {
           className="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-5 leading-tight" style={{ color: "#FFFBF5", fontFamily: "var(--font-heading), Georgia, serif" }}>
-            Ready to Meet Our Team?
+            Ready to Get Started?
           </h2>
           <p className="text-lg mb-10 leading-relaxed" style={{ color: "rgba(255,251,245,0.75)", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
             Schedule your initial consultation today and take the first step toward lasting mental wellness.
