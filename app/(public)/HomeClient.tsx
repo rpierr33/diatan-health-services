@@ -649,6 +649,25 @@ export default function HomeClient({ services, conditions, testimonials, insuran
                 Read all reviews on ZocDoc →
               </a>
             </div>
+
+            {/* Live ZocDoc reviews embed — auto-updates */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-10 rounded-2xl overflow-hidden"
+              style={{ backgroundColor: "rgba(255,251,245,0.05)", border: "1px solid rgba(255,251,245,0.08)" }}
+            >
+              <iframe
+                src="https://www.zocdoc.com/wl/diatanhealthservices/reviews?type=widget&monolith_provider_id=115310"
+                title="ZocDoc Patient Reviews — Dr. Anne Stephen"
+                className="w-full border-0"
+                style={{ height: "400px", colorScheme: "light" }}
+                loading="lazy"
+                allow="clipboard-write"
+              />
+            </motion.div>
           </motion.div>
 
           <motion.div
