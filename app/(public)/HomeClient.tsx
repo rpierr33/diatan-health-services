@@ -654,7 +654,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto gap-8">
+          <div className="flex justify-center gap-8">
             {[
               { src: "/dr-diatan.jpg", name: "Dr. Diatan", title: "Founder & Lead Psychiatrist, PMHNP-BC" },
             ].map((doc, i) => (
@@ -666,13 +666,13 @@ export default function HomeClient({ services, conditions, testimonials, insuran
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="text-center"
               >
-                <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden mb-4">
+                <div className="relative w-64 sm:w-72 aspect-[3/4] rounded-2xl overflow-hidden mb-4 mx-auto">
                   <Image
                     src={doc.src}
                     alt={doc.name}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 25vw"
+                    sizes="300px"
                   />
                 </div>
                 <h3

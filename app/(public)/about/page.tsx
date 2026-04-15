@@ -210,7 +210,7 @@ export default function AboutPage() {
             >
               <div className="relative h-56 overflow-hidden">
                 <Image
-                  src="/care-elders.jpg"
+                  src="/hero-provider.jpg"
                   alt="Community care at Diatan Health Services"
                   fill
                   className="object-cover"
@@ -260,7 +260,7 @@ export default function AboutPage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto gap-8">
+          <div className="flex justify-center gap-8">
             {[
               { src: "/dr-diatan.jpg", name: "Dr. Diatan", title: "Founder & Lead Psychiatrist, PMHNP-BC", bio: "Board-certified psychiatric professional with over 15 years of experience. Founder of Diatan Health Services, dedicated to providing compassionate, personalized mental health care." },
             ].map((doc, i) => (

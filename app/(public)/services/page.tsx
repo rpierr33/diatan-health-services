@@ -219,7 +219,7 @@ export default function ServicesPage() {
       {/* Care imagery strip */}
       <section className="relative overflow-hidden" style={{ height: "280px" }}>
         <Image
-          src="/care-senior.jpg"
+          src="/hero-provider.jpg"
           alt="Compassionate senior care at Diatan Health Services"
           fill
           className="object-cover"
