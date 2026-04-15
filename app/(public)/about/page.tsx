@@ -272,7 +272,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="text-center"
               >
-                <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden mb-4">
+                <div className="relative w-48 sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden mb-4 mx-auto">
                   <Image src={doc.src} alt={doc.name} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
                 <h3 className="text-base font-semibold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>{doc.name}</h3>
