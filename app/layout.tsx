@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Libre_Baskerville, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
@@ -80,12 +81,12 @@ export default function RootLayout({
         {children}
         <Toaster richColors position="top-right" />
         {/* ZocDoc Floating Booking Widget */}
-        <script
+        <Script
           src="https://offsiteSchedule.zocdoc.com/bookwidget.js"
           data-type="bobjs"
           data-monolith-provider-id="115310"
           data-practice-id="pt_2klKODgDxU6RJZzrX7Ilbh"
-          async
+          strategy="afterInteractive"
         />
       </body>
     </html>
