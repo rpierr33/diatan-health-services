@@ -656,7 +656,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
 
           <div className="flex justify-center gap-8">
             {[
-              { src: "/dr-diatan.jpg", name: "Dr. Diatan", title: "Founder & Lead Psychiatrist, PMHNP-BC" },
+              { src: "/dr-diatan.jpg", name: "Dr. Anne Stephen, DNP, PMHNP", title: "Family Psychiatric & Mental Health Nurse Practitioner" },
             ].map((doc, i) => (
               <motion.div
                 key={doc.name}

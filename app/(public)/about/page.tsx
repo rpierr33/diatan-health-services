@@ -262,7 +262,7 @@ export default function AboutPage() {
 
           <div className="flex justify-center gap-8">
             {[
-              { src: "/dr-diatan.jpg", name: "Dr. Diatan", title: "Founder & Lead Psychiatrist, PMHNP-BC", bio: "Board-certified psychiatric professional with over 15 years of experience. Founder of Diatan Health Services, dedicated to providing compassionate, personalized mental health care." },
+              { src: "/dr-diatan.jpg", name: "Dr. Anne Stephen, DNP, PMHNP", title: "Family Psychiatric & Mental Health Nurse Practitioner", bio: "Board-certified psychiatric professional with over 15 years of experience. Founder of Diatan Health Services, dedicated to providing compassionate, personalized mental health care." },
             ].map((doc, i) => (
               <motion.div
                 key={doc.name}
