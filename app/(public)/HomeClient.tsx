@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { PhotoBand, PhotoFrame } from "@/components/public/Photo";
-import { LeafSprig, LeafRule, RippleArcs, DotField } from "@/components/public/Ornament";
+import { LeafSprig, LeafRule, DotField } from "@/components/public/Ornament";
 import {
   ClipboardList,
   Pill,
@@ -192,21 +192,10 @@ function TestimonialCarousel({ testimonials }: { testimonials: DbTestimonial[] }
 
   const t = testimonials[current];
 
+  // No decorative quote mark above the quotation — the text below is already
+  // wrapped in curly quotes, so a second floating one reads as a stray glyph.
   return (
     <div className="max-w-2xl mx-auto text-center">
-      <div
-        aria-hidden="true"
-        className="text-8xl leading-none mb-4 select-none"
-        style={{
-          color: "#3D5A3E",
-          opacity: 0.3,
-          fontFamily: "var(--font-heading), Georgia, serif",
-          lineHeight: 0.8,
-        }}
-      >
-        &ldquo;
-      </div>
-
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -466,14 +455,23 @@ export default function HomeClient({ services, conditions, testimonials, insuran
       {/* ═══════════════════════════════════════════════════════
           SERVICES — Accordion from DB
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="shell-read">
+      <section className="py-28 relative overflow-hidden" style={{ backgroundColor: "#FFFFFF" }}>
+        <DotField
+          className="pointer-events-none absolute"
+          style={{ top: 0, left: 0, width: "240px", height: "190px", opacity: 0.3 }}
+          id="home-services-dots"
+        />
+        <LeafSprig
+          className="pointer-events-none absolute hidden lg:block"
+          style={{ bottom: "-24px", right: "56px", width: "92px", height: "156px", opacity: 0.24, transform: "rotate(12deg)" }}
+        />
+        <div className="relative shell-read">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={sectionReveal}
-            className="mb-14"
+            className="mb-14 text-center"
           >
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
@@ -495,7 +493,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
               <br />
               built around you.
             </h2>
-            <LeafRule className="mt-6" style={{ width: "160px", height: "24px" }} />
+            <LeafRule className="mt-6 mx-auto" style={{ width: "160px", height: "24px" }} />
           </motion.div>
 
           {services.length > 0 ? (
@@ -506,7 +504,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
             </p>
           )}
 
-          <div className="mt-10">
+          <div className="mt-10 text-center">
             <Link
               href="/services"
               className="inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:opacity-80"
@@ -553,7 +551,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={sectionReveal}
-            className="mb-12"
+            className="mb-12 text-center"
           >
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
@@ -580,7 +578,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
             variants={stagger}
-            className="flex flex-wrap gap-3 mb-10"
+            className="flex flex-wrap justify-center gap-3 mb-10"
           >
             {conditions.slice(0, 12).map((condition, i) => (
               <motion.div key={condition.id} variants={fadeUp} custom={i * 0.04}>
@@ -626,17 +624,19 @@ export default function HomeClient({ services, conditions, testimonials, insuran
             )}
           </motion.div>
 
-          <Link
-            href="/conditions"
-            className="inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:opacity-80"
-            style={{
-              color: "#3D5A3E",
-              fontFamily: "var(--font-body), system-ui, sans-serif",
-            }}
-          >
-            View all conditions
-            <ChevronRight className="w-4 h-4" aria-hidden="true" />
-          </Link>
+          <div className="text-center">
+            <Link
+              href="/conditions"
+              className="inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:opacity-80"
+              style={{
+                color: "#3D5A3E",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+              }}
+            >
+              View all conditions
+              <ChevronRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -644,11 +644,6 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           ZOCDOC REVIEWS + TESTIMONIALS
          ═══════════════════════════════════════════════════════ */}
       <section className="py-28 relative overflow-hidden" style={{ backgroundColor: "#2A2420" }}>
-        <RippleArcs
-          className="pointer-events-none absolute"
-          style={{ bottom: "0px", left: "50%", transform: "translateX(-50%)", width: "760px", height: "300px", opacity: 0.12 }}
-          color="#DEB896"
-        />
         <div className="relative shell-read">
           <motion.div
             initial="hidden"
@@ -905,7 +900,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           >
             Don&apos;t see your plan? Contact us — we may still be able to help.
           </motion.p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
               asChild
               className="font-semibold px-8 rounded-xl"

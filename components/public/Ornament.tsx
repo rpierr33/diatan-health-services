@@ -167,40 +167,6 @@ export function DotField({
   );
 }
 
-/* ── Concentric arcs — a quiet "ripple / breath" motif ────── */
-
-export function RippleArcs({
-  className,
-  style,
-  color = EARTH,
-  opacity = 1,
-}: OrnamentProps) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 200 120"
-      fill="none"
-      className={className}
-      style={{ color, opacity, ...style }}
-    >
-      {[0, 1, 2, 3].map((i) => (
-        <path
-          key={i}
-          d={`M4 116C4 ${116 - (i + 1) * 26} ${46 + i * 2} ${
-            108 - (i + 1) * 26
-          } 100 ${108 - (i + 1) * 26}C${154 - i * 2} ${108 - (i + 1) * 26} 196 ${
-            116 - (i + 1) * 26
-          } 196 116`}
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          opacity={0.7 - i * 0.15}
-        />
-      ))}
-    </svg>
-  );
-}
-
 /* ── Organic blob — soft background mass ──────────────────── */
 
 export function BlobShape({

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { PhotoBand } from "@/components/public/Photo";
-import { LeafSprig, DotField, RippleArcs } from "@/components/public/Ornament";
+import { LeafSprig, DotField } from "@/components/public/Ornament";
 import { Phone, Calendar, ChevronRight } from "lucide-react";
 
 const conditionCategories = [
@@ -162,10 +162,6 @@ export default function ConditionsPage() {
         <LeafSprig
           className="pointer-events-none absolute hidden md:block"
           style={{ top: "24px", right: "60px", width: "92px", height: "156px", opacity: 0.26, transform: "rotate(16deg)" }}
-        />
-        <RippleArcs
-          className="pointer-events-none absolute hidden md:block"
-          style={{ bottom: "-10px", left: "48px", width: "180px", height: "108px", opacity: 0.22 }}
         />
         <div className="relative shell-read text-center">
           <motion.div initial="hidden" animate="visible" variants={sectionReveal}>
