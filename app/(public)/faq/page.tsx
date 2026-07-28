@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { PhotoBand } from "@/components/public/Photo";
+import { LeafSprig, DotField } from "@/components/public/Ornament";
 import { Phone, Calendar, ChevronDown } from "lucide-react";
 
 const faqs = [
@@ -128,6 +130,15 @@ export default function FAQPage() {
         <svg aria-hidden="true" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" className="pointer-events-none absolute" style={{ bottom: "-60px", right: "-80px", width: "440px", height: "440px", opacity: 0.05, color: "#3D5A3E" }}>
           <g transform="translate(300,300)"><path d="M120,-160C154,-138,178,-99,186,-58C194,-16,185,28,168,68C151,108,126,144,91,163C56,182,11,184,-32,176C-75,168,-116,150,-144,118C-172,86,-187,40,-180,-4C-173,-48,-144,-90,-108,-120C-72,-150,-29,-168,16,-169C61,-170,86,-182,120,-160Z" fill="currentColor" /></g>
         </svg>
+        <LeafSprig
+          className="pointer-events-none absolute hidden md:block"
+          style={{ top: "30px", left: "56px", width: "86px", height: "146px", opacity: 0.24, transform: "rotate(-16deg)" }}
+        />
+        <DotField
+          className="pointer-events-none absolute"
+          style={{ top: 0, right: 0, width: "240px", height: "180px", opacity: 0.2 }}
+          id="faq-dots"
+        />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">
             <motion.div variants={fadeUp} custom={0}>
@@ -176,6 +187,15 @@ export default function FAQPage() {
           </div>
         </div>
       </section>
+
+      <PhotoBand
+        src="/img/garden-window.webp"
+        alt="Morning light through a window looking out onto a green garden"
+        height={280}
+        position="center 55%"
+        eyebrow="Still wondering about something?"
+        headline="There's no such thing as a question that's too small."
+      />
 
       {/* CTA */}
       <section className="py-28" style={{ backgroundColor: "#F5EDE2" }}>

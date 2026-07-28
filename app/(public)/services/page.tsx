@@ -1,9 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { PhotoBand } from "@/components/public/Photo";
+import { LeafSprig, LeafRule } from "@/components/public/Ornament";
 import {
   ClipboardList, Pill, Heart, Shield, Video, BookOpen,
   Users, Leaf, Network, RefreshCw, ChevronRight, Phone, Calendar, ChevronDown,
@@ -33,9 +35,52 @@ const sectionReveal = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
+/* Imagery for individual services. Deliberately not every service — the gaps
+   are what give the list rhythm. Services left without an image (crisis
+   intervention, care coordination) are the ones where a stock photograph would
+   say nothing the copy doesn't already say. */
+const SERVICE_IMAGES: Record<string, { src: string; alt: string }> = {
+  "psychiatric-evaluations": {
+    src: "/img/conversation.webp",
+    alt: "Two people sitting and talking across a small table in a bright room",
+  },
+  "medication-management": {
+    src: "/img/medication.webp",
+    alt: "A hand filling a weekly pill organiser on a table",
+  },
+  "individual-therapy": {
+    src: "/img/comfort-hands.webp",
+    alt: "One person's hands resting over another's on a table",
+  },
+  telepsychiatry: {
+    src: "/img/telehealth-home.webp",
+    alt: "A person sitting comfortably on a sofa at home with a laptop",
+  },
+  psychoeducation: {
+    src: "/img/journal-writing.webp",
+    alt: "A person writing in an open notebook on a wooden table",
+  },
+  psr: {
+    src: "/img/gathering.webp",
+    alt: "A small group sitting together around a low table",
+  },
+  "wellness-prevention": {
+    src: "/img/leaf-detail.webp",
+    alt: "Green leaves lit from behind by afternoon sun",
+  },
+  "continuity-of-care": {
+    src: "/img/path-forest.webp",
+    alt: "A path curving away through a quiet, misty woodland",
+  },
+};
+
 function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
   const [open, setOpen] = useState(false);
   const Icon = service.icon;
+  const image = SERVICE_IMAGES[service.slug];
+  // Alternate which side the photograph sits on so the column zig-zags
+  // instead of reading as one long stack of identical cards.
+  const imageFirst = index % 2 === 1;
 
   return (
     <motion.div
@@ -45,7 +90,30 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       variants={sectionReveal}
       className="bg-white rounded-2xl border border-[#E0CDB8] overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
     >
-      <div className="p-8">
+      <div className={image ? "grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]" : undefined}>
+        {image && (
+          <div
+            className={`relative min-h-[220px] md:min-h-full ${imageFirst ? "md:order-1" : "md:order-2"}`}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 320px"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(196,149,106,0.08) 0%, rgba(61,90,62,0.14) 100%)",
+              }}
+            />
+          </div>
+        )}
+
+      <div className={`p-8 ${image ? (imageFirst ? "md:order-2" : "md:order-1") : ""}`}>
         <div className="flex items-start gap-5 mb-5">
           <div
             className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
@@ -132,6 +200,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           </Link>
         </Button>
       </div>
+      </div>
     </motion.div>
   );
 }
@@ -156,6 +225,10 @@ export default function ServicesPage() {
             <path d="M120,-160C154,-138,178,-99,186,-58C194,-16,185,28,168,68C151,108,126,144,91,163C56,182,11,184,-32,176C-75,168,-116,150,-144,118C-172,86,-187,40,-180,-4C-173,-48,-144,-90,-108,-120C-72,-150,-29,-168,16,-169C61,-170,86,-182,120,-160Z" fill="currentColor" />
           </g>
         </svg>
+        <LeafSprig
+          className="pointer-events-none absolute hidden md:block"
+          style={{ top: "40px", left: "48px", width: "88px", height: "150px", opacity: 0.22, transform: "rotate(-14deg)" }}
+        />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">
             <motion.div variants={fadeUp} custom={0}>
@@ -177,6 +250,10 @@ export default function ServicesPage() {
               A full spectrum of{" "}
               <span style={{ color: "#3D5A3E" }}>compassionate care.</span>
             </motion.h1>
+
+            <motion.div variants={fadeUp} custom={1.5} className="mb-6">
+              <LeafRule style={{ width: "160px", height: "24px" }} />
+            </motion.div>
 
             <motion.p
               variants={fadeUp}
@@ -217,26 +294,14 @@ export default function ServicesPage() {
       </section>
 
       {/* Care imagery strip */}
-      <section className="relative overflow-hidden" style={{ height: "280px" }}>
-        <Image
-          src="/hero-provider.jpg"
-          alt="Compassionate senior care at Diatan Health Services"
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(255,251,245,0.7) 0%, transparent 50%, rgba(255,251,245,0.7) 100%)" }} />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-4">
-            <p className="text-lg font-semibold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
-              Serving Lauderhill, FL and surrounding communities
-            </p>
-            <p className="text-sm mt-1" style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
-              In-person &amp; telehealth options available
-            </p>
-          </div>
-        </div>
-      </section>
+      <PhotoBand
+        src="/img/comfort-hands.webp"
+        alt="Two people holding hands across a table in a warm, softly lit room"
+        height={300}
+        position="center 45%"
+        headline="Serving Lauderhill, FL and surrounding communities"
+        subline="In-person & telehealth options available"
+      />
 
       {/* Services list */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
@@ -263,8 +328,29 @@ export default function ServicesPage() {
           </motion.div>
 
           <div className="space-y-6">
-            {services.map((service, index) => (
+            {services.slice(0, 5).map((service, index) => (
               <ServiceCard key={service.slug} service={service} index={index} />
+            ))}
+          </div>
+        </div>
+
+        {/* Breather halfway down a long list — the run of ten cards is where
+            this page previously went flat. */}
+        <div className="my-16">
+          <PhotoBand
+            src="/img/reading-room.webp"
+            alt="A person sitting and reading in a warm, sunlit room with an arched doorway"
+            height={300}
+            position="center 40%"
+            eyebrow="However you come to us"
+            headline="Care is not one conversation. It's the whole arc."
+          />
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="space-y-6">
+            {services.slice(5).map((service, index) => (
+              <ServiceCard key={service.slug} service={service} index={index + 5} />
             ))}
           </div>
         </div>

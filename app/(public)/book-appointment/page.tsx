@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import AppointmentForm from "./AppointmentForm";
 import { CheckCircle2, Shield, Clock } from "lucide-react";
+import { LeafSprig, DotField } from "@/components/public/Ornament";
 
 const sectionReveal = {
   hidden: { opacity: 0, y: 28 },
@@ -22,6 +23,15 @@ export default function BookAppointmentPage() {
         <svg aria-hidden="true" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" className="pointer-events-none absolute" style={{ bottom: "-60px", right: "-80px", width: "440px", height: "440px", opacity: 0.05, color: "#3D5A3E" }}>
           <g transform="translate(300,300)"><path d="M120,-160C154,-138,178,-99,186,-58C194,-16,185,28,168,68C151,108,126,144,91,163C56,182,11,184,-32,176C-75,168,-116,150,-144,118C-172,86,-187,40,-180,-4C-173,-48,-144,-90,-108,-120C-72,-150,-29,-168,16,-169C61,-170,86,-182,120,-160Z" fill="currentColor" /></g>
         </svg>
+        <LeafSprig
+          className="pointer-events-none absolute hidden md:block"
+          style={{ top: "26px", left: "56px", width: "88px", height: "148px", opacity: 0.24, transform: "rotate(-15deg)" }}
+        />
+        <DotField
+          className="pointer-events-none absolute"
+          style={{ top: 0, right: 0, width: "230px", height: "170px", opacity: 0.2 }}
+          id="booking-dots"
+        />
 
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">

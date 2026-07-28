@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Briefcase, Users, Clock } from "lucide-react";
+import { PhotoBand } from "@/components/public/Photo";
+import { LeafSprig } from "@/components/public/Ornament";
 import CareerApplicationForm from "./CareerApplicationForm";
 
 interface Job {
@@ -44,6 +46,10 @@ export default function CareersClient({ jobs }: Props) {
         <svg aria-hidden="true" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" className="pointer-events-none absolute" style={{ bottom: "-60px", right: "-80px", width: "440px", height: "440px", opacity: 0.05, color: "#3D5A3E" }}>
           <g transform="translate(300,300)"><path d="M120,-160C154,-138,178,-99,186,-58C194,-16,185,28,168,68C151,108,126,144,91,163C56,182,11,184,-32,176C-75,168,-116,150,-144,118C-172,86,-187,40,-180,-4C-173,-48,-144,-90,-108,-120C-72,-150,-29,-168,16,-169C61,-170,86,-182,120,-160Z" fill="currentColor" /></g>
         </svg>
+        <LeafSprig
+          className="pointer-events-none absolute hidden md:block"
+          style={{ top: "28px", left: "54px", width: "88px", height: "148px", opacity: 0.24, transform: "rotate(-15deg)" }}
+        />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">
             <motion.div variants={fadeUp} custom={0}>
@@ -62,6 +68,15 @@ export default function CareersClient({ jobs }: Props) {
           </motion.div>
         </div>
       </section>
+
+      <PhotoBand
+        src="/img/conversation.webp"
+        alt="Two colleagues talking across a small table in a bright room"
+        height={320}
+        position="center 35%"
+        eyebrow="The work we do together"
+        headline="Careful, unhurried conversations — that's the job."
+      />
 
       {/* Why Join */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
@@ -170,6 +185,15 @@ export default function CareersClient({ jobs }: Props) {
           )}
         </div>
       </section>
+
+      <PhotoBand
+        src="/img/gathering.webp"
+        alt="A small group sitting and talking together around a low table"
+        height={300}
+        position="center 45%"
+        eyebrow="Why people stay"
+        headline="A small team that actually knows each other."
+      />
 
       {/* Application Form */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>

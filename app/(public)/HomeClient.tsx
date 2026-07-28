@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { PhotoBand, PhotoFrame } from "@/components/public/Photo";
+import { LeafSprig, LeafRule, RippleArcs, DotField } from "@/components/public/Ornament";
 import {
   ClipboardList,
   Pill,
@@ -338,12 +340,13 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           </g>
         </svg>
 
-        <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+        <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-28">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={stagger}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center text-center lg:items-start lg:text-left"
           >
             <motion.div variants={fadeUp} custom={0}>
               <span
@@ -392,7 +395,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
             <motion.div
               variants={fadeUp}
               custom={3}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <Button
                 asChild
@@ -428,6 +431,32 @@ export default function HomeClient({ services, conditions, testimonials, insuran
               </Button>
             </motion.div>
           </motion.div>
+
+          {/* Welcome photograph — a quiet, sunlit room. Deliberately no
+              faces: this is the feeling of the practice, not a claim about
+              who works here. */}
+          <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
+            <LeafSprig
+              className="pointer-events-none absolute hidden lg:block"
+              style={{
+                top: "-46px",
+                left: "-58px",
+                width: "96px",
+                height: "160px",
+                opacity: 0.32,
+                transform: "rotate(-18deg)",
+              }}
+            />
+            <PhotoFrame
+              src="/img/welcome-room.webp"
+              alt="A pair of wooden chairs facing a tall arched window, sunlight falling across the floor"
+              shape="arch"
+              aspect="4 / 5"
+              position="center 42%"
+              delay={0.25}
+            />
+          </div>
+          </div>
         </div>
       </section>
 
@@ -463,6 +492,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
               <br />
               built around you.
             </h2>
+            <LeafRule className="mt-6" style={{ width: "160px", height: "24px" }} />
           </motion.div>
 
           {services.length > 0 ? (
@@ -490,10 +520,31 @@ export default function HomeClient({ services, conditions, testimonials, insuran
       </section>
 
       {/* ═══════════════════════════════════════════════════════
+          IMAGE BAND — emotional pivot into conditions
+         ═══════════════════════════════════════════════════════ */}
+      <PhotoBand
+        src="/img/support-hands.webp"
+        alt="Two people sitting across a table, one holding the other's hands, warm daylight from a nearby window"
+        height={380}
+        position="center 38%"
+        eyebrow="You are not alone in this"
+        headline="Whatever you're carrying, you don't have to carry it by yourself."
+      />
+
+      {/* ═══════════════════════════════════════════════════════
           CONDITIONS — Tag cloud from DB
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-28" style={{ backgroundColor: "#F5EDE2" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-28 relative overflow-hidden" style={{ backgroundColor: "#F5EDE2" }}>
+        <DotField
+          className="pointer-events-none absolute"
+          style={{ top: 0, right: 0, width: "280px", height: "220px", opacity: 0.28 }}
+          id="home-conditions-dots"
+        />
+        <LeafSprig
+          className="pointer-events-none absolute hidden lg:block"
+          style={{ bottom: "-30px", left: "40px", width: "94px", height: "158px", opacity: 0.22, transform: "rotate(-12deg)" }}
+        />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -589,8 +640,13 @@ export default function HomeClient({ services, conditions, testimonials, insuran
       {/* ═══════════════════════════════════════════════════════
           ZOCDOC REVIEWS + TESTIMONIALS
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-28" style={{ backgroundColor: "#2A2420" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-28 relative overflow-hidden" style={{ backgroundColor: "#2A2420" }}>
+        <RippleArcs
+          className="pointer-events-none absolute"
+          style={{ bottom: "0px", left: "50%", transform: "translateX(-50%)", width: "760px", height: "300px", opacity: 0.12 }}
+          color="#DEB896"
+        />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -757,6 +813,16 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           </motion.div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          IMAGE BAND — a breath before the practical details
+         ═══════════════════════════════════════════════════════ */}
+      <PhotoBand
+        src="/img/garden-window.webp"
+        alt="Soft morning light coming through a window onto a green garden outside"
+        height={300}
+        position="center 55%"
+      />
 
       {/* ═══════════════════════════════════════════════════════
           INSURANCE

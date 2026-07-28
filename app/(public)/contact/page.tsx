@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, AlertTriangle } from "lucide-react";
+import { PhotoFrame } from "@/components/public/Photo";
 import ContactForm from "./ContactForm";
 
 const sectionReveal = {
@@ -60,8 +61,9 @@ export default function ContactPage() {
         <svg aria-hidden="true" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" className="pointer-events-none absolute" style={{ bottom: "-60px", right: "-80px", width: "440px", height: "440px", opacity: 0.05, color: "#3D5A3E" }}>
           <g transform="translate(300,300)"><path d="M120,-160C154,-138,178,-99,186,-58C194,-16,185,28,168,68C151,108,126,144,91,163C56,182,11,184,-32,176C-75,168,-116,150,-144,118C-172,86,-187,40,-180,-4C-173,-48,-144,-90,-108,-120C-72,-150,-29,-168,16,-169C61,-170,86,-182,120,-160Z" fill="currentColor" /></g>
         </svg>
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[1fr_0.85fr] gap-12 lg:gap-16 items-center">
+          <motion.div initial="hidden" animate="visible" className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <motion.div variants={fadeUp} custom={0}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-8" style={{ backgroundColor: "#F5EDE2", color: "#3D5A3E", border: "1px solid #E0CDB8", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
                 <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ backgroundColor: "#3D5A3E" }} />
@@ -76,6 +78,19 @@ export default function ContactPage() {
               Reach out with questions, or to schedule your first appointment. We respond within one business day.
             </motion.p>
           </motion.div>
+
+          <div className="relative mx-auto w-full max-w-xs lg:max-w-none">
+            <PhotoFrame
+              src="/img/welcome-room.webp"
+              alt="Wooden chairs beside a tall arched window with sunlight falling across the floor"
+              shape="arch"
+              aspect="4 / 5"
+              position="center 42%"
+              delay={0.25}
+              sprig
+            />
+          </div>
+          </div>
         </div>
       </section>
 

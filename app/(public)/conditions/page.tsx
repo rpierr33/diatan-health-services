@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { PhotoBand } from "@/components/public/Photo";
+import { LeafSprig, DotField, RippleArcs } from "@/components/public/Ornament";
 import { Phone, Calendar, ChevronRight } from "lucide-react";
 
 const conditionCategories = [
@@ -73,12 +75,99 @@ const sectionReveal = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
+/* One category and its conditions. Shared by both halves of the list so the
+   two runs either side of the mid-page image band can't drift apart. */
+function CategoryBlock({
+  cat,
+  showDivider,
+}: {
+  cat: (typeof conditionCategories)[number];
+  showDivider: boolean;
+}) {
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-60px" }}
+      variants={sectionReveal}
+      className="mb-16 last:mb-0"
+    >
+      {/* Category header */}
+      <div className="flex items-center gap-3 mb-8">
+        <div className="w-1.5 h-8 rounded-full" style={{ backgroundColor: "#C4956A" }} />
+        <h2
+          className="text-2xl font-bold"
+          style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}
+        >
+          {cat.category}
+        </h2>
+      </div>
+
+      {/* Condition cards */}
+      <div className="space-y-3">
+        {cat.conditions.map((condition) => (
+          <Link
+            key={condition.name}
+            href="/book-appointment"
+            className="group block rounded-xl px-6 py-5 transition-all duration-300"
+            style={{ backgroundColor: "#FFFBF5", border: "1px solid #F0E6D9" }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#F5EDE2";
+              e.currentTarget.style.borderColor = "#C4956A";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "#FFFBF5";
+              e.currentTarget.style.borderColor = "#F0E6D9";
+            }}
+          >
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex-1 min-w-0">
+                <h3
+                  className="text-base font-semibold mb-1"
+                  style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}
+                >
+                  {condition.name}
+                </h3>
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}
+                >
+                  {condition.desc}
+                </p>
+              </div>
+              <ChevronRight
+                className="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                style={{ color: "#3D5A3E" }}
+              />
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {showDivider && <div className="mt-12 border-b" style={{ borderColor: "#F0E6D9" }} />}
+    </motion.div>
+  );
+}
+
 export default function ConditionsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="py-28" style={{ backgroundColor: "#FFFBF5" }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-28 relative overflow-hidden" style={{ backgroundColor: "#FFFBF5" }}>
+        <DotField
+          className="pointer-events-none absolute"
+          style={{ top: 0, left: 0, width: "260px", height: "200px", opacity: 0.22 }}
+          id="conditions-dots"
+        />
+        <LeafSprig
+          className="pointer-events-none absolute hidden md:block"
+          style={{ top: "24px", right: "60px", width: "92px", height: "156px", opacity: 0.26, transform: "rotate(16deg)" }}
+        />
+        <RippleArcs
+          className="pointer-events-none absolute hidden md:block"
+          style={{ bottom: "-10px", left: "48px", width: "180px", height: "108px", opacity: 0.22 }}
+        />
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial="hidden" animate="visible" variants={sectionReveal}>
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest mb-6"
@@ -113,78 +202,36 @@ export default function ConditionsPage() {
         </div>
       </section>
 
+      <PhotoBand
+        src="/img/comfort-hands.webp"
+        alt="One person's hands resting over another's on a table, both in soft knitwear"
+        height={320}
+        position="center 50%"
+        eyebrow="Whatever brought you here"
+        headline="A name for what you're feeling is the beginning, not the end."
+      />
+
       {/* Conditions by Category */}
       <section className="py-20" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {conditionCategories.map((cat, catIdx) => (
-            <motion.div
-              key={cat.category}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
-              variants={sectionReveal}
-              className="mb-16 last:mb-0"
-            >
-              {/* Category header */}
-              <div className="flex items-center gap-3 mb-8">
-                <div
-                  className="w-1.5 h-8 rounded-full"
-                  style={{ backgroundColor: "#C4956A" }}
-                />
-                <h2
-                  className="text-2xl font-bold"
-                  style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}
-                >
-                  {cat.category}
-                </h2>
-              </div>
+          {conditionCategories.slice(0, 4).map((cat) => (
+            <CategoryBlock key={cat.category} cat={cat} showDivider />
+          ))}
+        </div>
 
-              {/* Condition cards */}
-              <div className="space-y-3">
-                {cat.conditions.map((condition) => (
-                  <Link
-                    key={condition.name}
-                    href="/book-appointment"
-                    className="group block rounded-xl px-6 py-5 transition-all duration-300"
-                    style={{ backgroundColor: "#FFFBF5", border: "1px solid #F0E6D9" }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#F5EDE2";
-                      e.currentTarget.style.borderColor = "#C4956A";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "#FFFBF5";
-                      e.currentTarget.style.borderColor = "#F0E6D9";
-                    }}
-                  >
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex-1 min-w-0">
-                        <h3
-                          className="text-base font-semibold mb-1"
-                          style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}
-                        >
-                          {condition.name}
-                        </h3>
-                        <p
-                          className="text-sm leading-relaxed"
-                          style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}
-                        >
-                          {condition.desc}
-                        </p>
-                      </div>
-                      <ChevronRight
-                        className="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                        style={{ color: "#3D5A3E" }}
-                      />
-                    </div>
-                  </Link>
-                ))}
-              </div>
+        {/* Breather partway down a long list of diagnoses */}
+        <div className="my-16">
+          <PhotoBand
+            src="/img/leaf-detail.webp"
+            alt="Green leaves lit from behind by afternoon sun"
+            height={260}
+            position="center 50%"
+          />
+        </div>
 
-              {/* Divider between categories */}
-              {catIdx < conditionCategories.length - 1 && (
-                <div className="mt-12 border-b" style={{ borderColor: "#F0E6D9" }} />
-              )}
-            </motion.div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {conditionCategories.slice(4).map((cat, i, arr) => (
+            <CategoryBlock key={cat.category} cat={cat} showDivider={i < arr.length - 1} />
           ))}
         </div>
       </section>

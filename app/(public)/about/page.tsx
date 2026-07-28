@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { PhotoBand } from "@/components/public/Photo";
+import { LeafSprig } from "@/components/public/Ornament";
 import {
   Heart, Shield, Users, Star, CheckCircle2,
   Phone, Calendar, Award, BookOpen, Sparkles, MapPin, Clock,
@@ -210,10 +212,11 @@ export default function AboutPage() {
             >
               <div className="relative h-56 overflow-hidden">
                 <Image
-                  src="/hero-provider.jpg"
-                  alt="Community care at Diatan Health Services"
+                  src="/img/journal-terracotta.webp"
+                  alt="A journal and a cup of coffee on a round wooden table, striped sunlight falling across them"
                   fill
                   className="object-cover"
+                  style={{ objectPosition: "center 45%" }}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
@@ -241,7 +244,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      <PhotoBand
+        src="/img/path-forest.webp"
+        alt="A path curving away through a quiet, misty woodland"
+        height={320}
+        position="center 60%"
+        eyebrow="Recovery is not a straight line"
+        headline="We'll walk it at whatever pace it takes."
+      />
+
       {/* Our Providers */}
       <section className="py-28" style={{ backgroundColor: "#FFFBF5" }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

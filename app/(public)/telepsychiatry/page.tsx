@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { PhotoBand, PhotoFrame } from "@/components/public/Photo";
+import { LeafSprig } from "@/components/public/Ornament";
 import {
   Video, Wifi, Lock, Smartphone, Monitor,
   CheckCircle2, Phone, Calendar, ChevronRight,
@@ -43,6 +45,10 @@ export default function TelepsychiatryPage() {
           <g transform="translate(300,300)"><path d="M120,-160C154,-138,178,-99,186,-58C194,-16,185,28,168,68C151,108,126,144,91,163C56,182,11,184,-32,176C-75,168,-116,150,-144,118C-172,86,-187,40,-180,-4C-173,-48,-144,-90,-108,-120C-72,-150,-29,-168,16,-169C61,-170,86,-182,120,-160Z" fill="currentColor" /></g>
         </svg>
 
+        <LeafSprig
+          className="pointer-events-none absolute hidden lg:block"
+          style={{ top: "34px", left: "40px", width: "86px", height: "146px", opacity: 0.2, transform: "rotate(-16deg)" }}
+        />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial="hidden" animate="visible" variants={stagger}>
@@ -78,26 +84,47 @@ export default function TelepsychiatryPage() {
               </motion.div>
             </motion.div>
 
-            {/* Video illustration */}
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="hidden lg:flex items-center justify-center"
-            >
-              <div
-                className="rounded-3xl p-12 text-center border"
-                style={{ backgroundColor: "#FFFFFF", borderColor: "#E0CDB8", boxShadow: "0 8px 32px rgba(61,90,62,0.08)" }}
+            {/* Care from home — photograph with the privacy reassurance
+                floated over it, so the badge reads as a promise about the
+                platform rather than a caption about the person shown. */}
+            <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+              <PhotoFrame
+                src="/img/telehealth-home.webp"
+                alt="A person sitting comfortably on a sofa at home with a laptop"
+                shape="rounded"
+                aspect="1 / 1"
+                position="center 40%"
+                delay={0.3}
+              />
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute rounded-2xl px-6 py-5 border text-center"
+                style={{
+                  // Centred with auto margins, not translateX: framer-motion
+                  // writes its own `transform` for the entry animation and
+                  // would overwrite a translate set here (clipped on mobile).
+                  bottom: "-22px",
+                  left: 0,
+                  right: 0,
+                  marginInline: "auto",
+                  width: "fit-content",
+                  backgroundColor: "#FFFFFF",
+                  borderColor: "#E0CDB8",
+                  boxShadow: "0 12px 32px rgba(61,90,62,0.14)",
+                  minWidth: "230px",
+                }}
               >
-                <Video className="w-24 h-24 mx-auto mb-4" style={{ color: "#3D5A3E", opacity: 0.5 }} aria-hidden="true" />
-                <p className="font-bold text-xl" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
+                <Video className="w-7 h-7 mx-auto mb-2" style={{ color: "#3D5A3E" }} aria-hidden="true" />
+                <p className="font-bold text-base" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
                   Secure &amp; Private
                 </p>
-                <p className="mt-2 text-sm" style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
+                <p className="mt-1 text-xs" style={{ color: "#6B5E52", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
                   HIPAA-compliant platform
                 </p>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -225,6 +252,15 @@ export default function TelepsychiatryPage() {
           </motion.div>
         </div>
       </section>
+
+      <PhotoBand
+        src="/img/sunlight-blinds.webp"
+        alt="Late afternoon sunlight coming through window blinds onto a small potted plant"
+        height={300}
+        position="center 50%"
+        eyebrow="From wherever you feel most yourself"
+        headline="Your living room can be the waiting room."
+      />
 
       {/* CTA */}
       <section className="py-28 relative overflow-hidden" style={{ backgroundColor: "#2A2420" }}>
