@@ -49,7 +49,7 @@ export default function TelepsychiatryPage() {
           className="pointer-events-none absolute hidden lg:block"
           style={{ top: "34px", left: "40px", width: "86px", height: "146px", opacity: 0.2, transform: "rotate(-16deg)" }}
         />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative shell">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial="hidden" animate="visible" variants={stagger}>
               <motion.div variants={fadeUp} custom={0}>
@@ -131,7 +131,7 @@ export default function TelepsychiatryPage() {
 
       {/* How it works */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={sectionReveal} className="mb-14">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C4956A", fontFamily: "var(--font-body), system-ui, sans-serif" }}>Simple Process</span>
             <h2 className="text-4xl sm:text-5xl font-bold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
@@ -169,7 +169,7 @@ export default function TelepsychiatryPage() {
 
       {/* What to expect + requirements */}
       <section className="py-28" style={{ backgroundColor: "#F5EDE2" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell">
           <div className="grid lg:grid-cols-2 gap-16">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={sectionReveal}>
               <span className="inline-block text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C4956A", fontFamily: "var(--font-body), system-ui, sans-serif" }}>Expectations</span>
@@ -224,7 +224,7 @@ export default function TelepsychiatryPage() {
 
       {/* Services via Telehealth */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell-read">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={sectionReveal} className="mb-12">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C4956A", fontFamily: "var(--font-body), system-ui, sans-serif" }}>Available Remotely</span>
             <h2 className="text-4xl sm:text-5xl font-bold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>

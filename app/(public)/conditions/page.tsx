@@ -167,7 +167,7 @@ export default function ConditionsPage() {
           className="pointer-events-none absolute hidden md:block"
           style={{ bottom: "-10px", left: "48px", width: "180px", height: "108px", opacity: 0.22 }}
         />
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative shell-read text-center">
           <motion.div initial="hidden" animate="visible" variants={sectionReveal}>
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest mb-6"
@@ -213,7 +213,7 @@ export default function ConditionsPage() {
 
       {/* Conditions by Category */}
       <section className="py-20" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell-read">
           {conditionCategories.slice(0, 4).map((cat) => (
             <CategoryBlock key={cat.category} cat={cat} showDivider />
           ))}
@@ -229,7 +229,7 @@ export default function ConditionsPage() {
           />
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell-read">
           {conditionCategories.slice(4).map((cat, i, arr) => (
             <CategoryBlock key={cat.category} cat={cat} showDivider={i < arr.length - 1} />
           ))}

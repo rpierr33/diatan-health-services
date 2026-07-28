@@ -55,7 +55,7 @@ export default function ResourcesClient({ posts, categoryLabels }: Props) {
           className="pointer-events-none absolute hidden md:block"
           style={{ top: "26px", right: "58px", width: "88px", height: "148px", opacity: 0.24, transform: "rotate(15deg)" }}
         />
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative shell-read text-center">
           <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">
             <motion.div variants={fadeUp} custom={0}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-8" style={{ backgroundColor: "#F5EDE2", color: "#3D5A3E", border: "1px solid #E0CDB8", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
@@ -85,7 +85,7 @@ export default function ResourcesClient({ posts, categoryLabels }: Props) {
 
       {/* Blog posts */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell">
           {posts.length === 0 ? (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12">
               <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" style={{ color: "#C4956A" }} aria-hidden="true" />
@@ -155,7 +155,7 @@ export default function ResourcesClient({ posts, categoryLabels }: Props) {
 
       {/* Crisis Resources */}
       <section className="py-28" style={{ backgroundColor: "#F5EDE2" }}>
-        <div className="max-w-3xl mx-auto px-4 text-center">
+        <div className="shell-read text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={sectionReveal}>
             <span className="inline-block text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C4956A", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
               In an Emergency

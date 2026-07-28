@@ -139,7 +139,7 @@ export default function FAQPage() {
           style={{ top: 0, right: 0, width: "240px", height: "180px", opacity: 0.2 }}
           id="faq-dots"
         />
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative shell-read text-center">
           <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">
             <motion.div variants={fadeUp} custom={0}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-8" style={{ backgroundColor: "#F5EDE2", color: "#3D5A3E", border: "1px solid #E0CDB8", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
@@ -160,7 +160,7 @@ export default function FAQPage() {
 
       {/* FAQs */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell-read">
           <div className="space-y-16">
             {faqs.map((section) => (
               <motion.div

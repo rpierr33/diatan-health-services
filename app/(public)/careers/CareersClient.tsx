@@ -50,7 +50,7 @@ export default function CareersClient({ jobs }: Props) {
           className="pointer-events-none absolute hidden md:block"
           style={{ top: "28px", left: "54px", width: "88px", height: "148px", opacity: 0.24, transform: "rotate(-15deg)" }}
         />
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative shell-read text-center">
           <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">
             <motion.div variants={fadeUp} custom={0}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-8" style={{ backgroundColor: "#F5EDE2", color: "#3D5A3E", border: "1px solid #E0CDB8", fontFamily: "var(--font-body), system-ui, sans-serif" }}>
@@ -80,7 +80,7 @@ export default function CareersClient({ jobs }: Props) {
 
       {/* Why Join */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={sectionReveal} className="mb-14">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C4956A", fontFamily: "var(--font-body), system-ui, sans-serif" }}>Why Us</span>
             <h2 className="text-4xl sm:text-5xl font-bold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>
@@ -114,7 +114,7 @@ export default function CareersClient({ jobs }: Props) {
 
       {/* Open Positions */}
       <section className="py-28" style={{ backgroundColor: "#F5EDE2" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell-read">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={sectionReveal} className="mb-12">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C4956A", fontFamily: "var(--font-body), system-ui, sans-serif" }}>Hiring Now</span>
             <h2 className="text-4xl sm:text-5xl font-bold" style={{ color: "#2A2420", fontFamily: "var(--font-heading), Georgia, serif" }}>

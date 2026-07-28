@@ -116,6 +116,34 @@
   }
 }
 
+/* ── Page shells ─────────────────────────────────────────────
+   Percentage-driven, so the gutter scales with the screen instead of
+   snapping between fixed pixel containers. The max-width is only an
+   ultra-wide guard — below roughly 1800px the percentage is what governs,
+   which covers every real display.
+
+   .shell       page frame: header, footer, hero, full-width sections
+   .shell-read  content measure: card lists and prose
+   Two widths, not eight — so everything sits on a predictable rail.        */
+.shell {
+  width: 92%;
+  max-width: 1680px;
+  margin-inline: auto;
+}
+.shell-read {
+  width: 92%;
+  max-width: 1500px;
+  margin-inline: auto;
+}
+
+/* Long-form prose only (legal pages, article bodies). Line length is a
+   readability limit, so this one is measured in characters, not pixels. */
+.shell-prose {
+  width: 92%;
+  max-width: 78ch;
+  margin-inline: auto;
+}
+
 /* ── Typography helpers ──────────────────────────────────── */
 .font-body {
   font-family: var(--font-body), system-ui, sans-serif;

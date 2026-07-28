@@ -104,7 +104,7 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <article className="py-12" style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="shell-prose">
         <Link
           href="/resources"
           className="inline-flex items-center gap-2 text-sm mb-8 font-medium"

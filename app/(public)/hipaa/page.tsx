@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function HIPAAPage() {
   return (
     <div className="py-16" style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="shell-prose">
         <div className="mb-8">
           <Badge style={{ backgroundColor: "#27AE60", color: "#FFFFFF" }} className="mb-3">
             Legal

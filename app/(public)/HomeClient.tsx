@@ -340,7 +340,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           </g>
         </svg>
 
-        <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-28">
+        <div className="relative w-full shell py-24 lg:py-28">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center">
           <motion.div
             initial="hidden"
@@ -435,7 +435,9 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           {/* Welcome photograph — a quiet, sunlit room. Deliberately no
               faces: this is the feeling of the practice, not a claim about
               who works here. */}
-          <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
+          {/* Capped so the photograph stays a companion to the headline
+              rather than dominating the fold on a wide monitor. */}
+          <div className="relative mx-auto w-full max-w-sm lg:ml-auto lg:mr-0 lg:max-w-[520px]">
             <LeafSprig
               className="pointer-events-none absolute hidden lg:block"
               style={{
@@ -465,7 +467,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           SERVICES — Accordion from DB
          ═══════════════════════════════════════════════════════ */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell-read">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -545,7 +547,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           className="pointer-events-none absolute hidden lg:block"
           style={{ bottom: "-30px", left: "40px", width: "94px", height: "158px", opacity: 0.22, transform: "rotate(-12deg)" }}
         />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative shell-read">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -647,7 +649,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           style={{ bottom: "0px", left: "50%", transform: "translateX(-50%)", width: "760px", height: "300px", opacity: 0.12 }}
           color="#DEB896"
         />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative shell-read">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -732,7 +734,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           MEET OUR PROVIDERS
          ═══════════════════════════════════════════════════════ */}
       <section className="py-28" style={{ backgroundColor: "#FFFBF5" }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -829,7 +831,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
           INSURANCE
          ═══════════════════════════════════════════════════════ */}
       <section className="py-28" style={{ backgroundColor: "#F5EDE2" }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell">
           <motion.div
             initial="hidden"
             whileInView="visible"

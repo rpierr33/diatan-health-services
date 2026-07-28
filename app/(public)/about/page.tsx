@@ -41,7 +41,7 @@ export default function AboutPage() {
           <g transform="translate(300,300)"><path d="M120,-160C154,-138,178,-99,186,-58C194,-16,185,28,168,68C151,108,126,144,91,163C56,182,11,184,-32,176C-75,168,-116,150,-144,118C-172,86,-187,40,-180,-4C-173,-48,-144,-90,-108,-120C-72,-150,-29,-168,16,-169C61,-170,86,-182,120,-160Z" fill="currentColor" /></g>
         </svg>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative shell">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial="hidden" animate="visible" variants={stagger}>
               <motion.div variants={fadeUp} custom={0}>
@@ -109,7 +109,7 @@ export default function AboutPage() {
 
       {/* Mission & Vision */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -182,7 +182,7 @@ export default function AboutPage() {
 
       {/* Credentials */}
       <section className="py-28" style={{ backgroundColor: "#F5EDE2" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={sectionReveal}>
               <span className="inline-block text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C4956A", fontFamily: "var(--font-body), system-ui, sans-serif" }}>Our Credentials</span>
@@ -255,7 +255,7 @@ export default function AboutPage() {
 
       {/* Our Providers */}
       <section className="py-28" style={{ backgroundColor: "#FFFBF5" }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell">
           <motion.div
             initial="hidden"
             whileInView="visible"

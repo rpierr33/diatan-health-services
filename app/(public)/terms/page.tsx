@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="py-16" style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="shell-prose">
         <div className="mb-8">
           <Badge style={{ backgroundColor: "#27AE60", color: "#FFFFFF" }} className="mb-3">Legal</Badge>
           <h1 className="text-3xl font-bold mb-2" style={{ color: "#2C3E50" }}>Terms of Service</h1>

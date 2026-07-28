@@ -229,7 +229,7 @@ export default function ServicesPage() {
           className="pointer-events-none absolute hidden md:block"
           style={{ top: "40px", left: "48px", width: "88px", height: "150px", opacity: 0.22, transform: "rotate(-14deg)" }}
         />
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative shell-read text-center">
           <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">
             <motion.div variants={fadeUp} custom={0}>
               <span
@@ -305,7 +305,7 @@ export default function ServicesPage() {
 
       {/* Services list */}
       <section className="py-28" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell-read">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -347,7 +347,7 @@ export default function ServicesPage() {
           />
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="shell-read">
           <div className="space-y-6">
             {services.slice(5).map((service, index) => (
               <ServiceCard key={service.slug} service={service} index={index + 5} />
