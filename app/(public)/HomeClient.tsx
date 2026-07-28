@@ -454,6 +454,7 @@ export default function HomeClient({ services, conditions, testimonials, insuran
               aspect="4 / 5"
               position="center 42%"
               delay={0.25}
+              priority
             />
           </div>
           </div>

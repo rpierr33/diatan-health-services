@@ -137,6 +137,7 @@ export function PhotoFrame({
   sprig = false,
   arch = false,
   delay = 0,
+  priority = false,
   className,
 }: {
   src: string;
@@ -150,6 +151,8 @@ export function PhotoFrame({
   /** decorative arch outline offset behind the photo */
   arch?: boolean;
   delay?: number;
+  /** set on above-the-fold hero photographs — these are the LCP element */
+  priority?: boolean;
   className?: string;
 }) {
   const radius =
@@ -193,6 +196,7 @@ export function PhotoFrame({
           src={src}
           alt={alt}
           fill
+          priority={priority}
           className="object-cover"
           style={{ objectPosition: position }}
           sizes="(max-width: 768px) 92vw, (max-width: 1200px) 46vw, 540px"

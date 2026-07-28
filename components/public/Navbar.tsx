@@ -38,6 +38,19 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [sideOpen]);
 
+  // Escape closes the menu — keyboard users need a way out of the drawer
+  useEffect(() => {
+    if (!sideOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSideOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [sideOpen]);
+
+  const handleClickToggle = () => setSideOpen((v) => !v);
+  const closeMenu = () => setSideOpen(false);
+
   return (
     <>
       <header
@@ -58,15 +71,25 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Left: Hamburger + Logo */}
+            {/* Left: Menu button + Logo.
+                The word "Menu" is deliberate — the icon alone only reads as
+                navigation to people who already know the convention. */}
             <div className="flex items-center gap-3">
               <button
-                className="p-2 rounded-lg transition-colors hover:bg-[#F5EDE2]"
-                onClick={() => setSideOpen(true)}
-                aria-label="Open menu"
-                style={{ color: "#4A3F38" }}
+                className="flex items-center gap-2 pl-2 pr-3 py-2 rounded-lg border transition-colors hover:bg-[#F5EDE2]"
+                onClick={handleClickToggle}
+                aria-label={sideOpen ? "Close menu" : "Open menu"}
+                aria-expanded={sideOpen}
+                aria-haspopup="menu"
+                style={{ color: "#4A3F38", borderColor: "#E0CDB8" }}
               >
                 <Menu className="w-5 h-5" aria-hidden="true" />
+                <span
+                  className="text-sm font-semibold"
+                  style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}
+                >
+                  Menu
+                </span>
               </button>
 
               <Link
@@ -154,7 +177,7 @@ export default function Navbar() {
       {sideOpen && (
         <div
           className="fixed inset-0 z-[60] bg-black/30"
-          onClick={() => setSideOpen(false)}
+          onClick={closeMenu}
           aria-hidden="true"
         />
       )}
@@ -173,7 +196,7 @@ export default function Navbar() {
           <Link
             href="/"
             className="flex items-center gap-2"
-            onClick={() => setSideOpen(false)}
+            onClick={closeMenu}
           >
             <Image
               src="/diatan-logo.png"
@@ -190,7 +213,7 @@ export default function Navbar() {
             </span>
           </Link>
           <button
-            onClick={() => setSideOpen(false)}
+            onClick={closeMenu}
             className="p-2 rounded-lg hover:bg-[#F5EDE2] transition-colors"
             aria-label="Close menu"
             style={{ color: "#4A3F38" }}
@@ -209,7 +232,7 @@ export default function Navbar() {
                 color: "#4A3F38",
                 fontFamily: "var(--font-body), system-ui, sans-serif",
               }}
-              onClick={() => setSideOpen(false)}
+              onClick={closeMenu}
             >
               {link.label}
             </Link>
@@ -222,7 +245,7 @@ export default function Navbar() {
             className="w-full font-semibold btn-breathe rounded-lg"
             style={{ backgroundColor: "#3D5A3E", color: "#FFFFFF" }}
           >
-            <Link href="/book-appointment" onClick={() => setSideOpen(false)}>
+            <Link href="/book-appointment" onClick={closeMenu}>
               Book Appointment
             </Link>
           </Button>
